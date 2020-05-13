@@ -52,7 +52,7 @@ class TodayViewController: UIViewController {
         let titleStackView = TitleStackView(frame: CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: 44.0)))
         titleStackView.button.isHidden = true
         titleStackView.titleLabel.text = "TODAY"
-        titleStackView.titleLabel.textColor = .white
+        titleStackView.titleLabel.textColor = .black
         titleStackView.translatesAutoresizingMaskIntoConstraints = false
         return titleStackView
     }()
@@ -86,7 +86,7 @@ class TodayViewController: UIViewController {
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
         tableView.tableHeaderView = tableHeaderView
-        tableView.tableHeaderView?.backgroundColor = UIColor(rgbColorCodeRed: 233, green: 116, blue: 124, alpha: 1)
+        tableView.tableHeaderView?.backgroundColor = .systemGray5
         viewModel.fetchData()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()

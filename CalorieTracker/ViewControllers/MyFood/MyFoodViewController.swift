@@ -72,7 +72,11 @@ class MyFoodViewController: UIViewController {
         view.addSubview(tableView)
         tableView.rowHeight = 100
         tableView.pin(to:view)
+        tableView.backgroundColor = .systemGray4
+        tableView.separatorColor = .clear
         tableView.register(FoodCell.self, forCellReuseIdentifier: cellId)
+        tableView.allowsSelection = false
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -147,7 +151,7 @@ class MyFoodViewController: UIViewController {
     private func setupView(){
         title = nil
         navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.barTintColor = UIColor.white
+        navigationController?.navigationBar.barTintColor = .systemGray5
         navigationController?.navigationBar.shadowImage = UIImage()
         tableView.tableHeaderView = tableHeaderView
         tableView.tableFooterView = UIView()
@@ -197,6 +201,7 @@ extension MyFoodViewController:UITableViewDataSource{
         if let data = food.image{
             cell.foodImageView.image = UIImage(data: data)
         }
+        cell.contentView.backgroundColor = UIColor.clear
         return cell
     }
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -228,4 +233,13 @@ extension UIView{
         trailingAnchor.constraint(equalTo: superView.trailingAnchor).isActive = true
         bottomAnchor.constraint(equalTo: superView.bottomAnchor).isActive = true
     }
+    
+    func pin(to superView:UIView, constant:Int){
+        translatesAutoresizingMaskIntoConstraints = false
+        topAnchor.constraint(equalTo: superView.topAnchor, constant: CGFloat(constant)).isActive = true
+        leadingAnchor.constraint(equalTo: superView.leadingAnchor,  constant: CGFloat(constant)).isActive = true
+        trailingAnchor.constraint(equalTo: superView.trailingAnchor,  constant: CGFloat(-constant)).isActive = true
+        bottomAnchor.constraint(equalTo: superView.bottomAnchor,  constant: CGFloat(-constant)).isActive = true
+    }
+    
 }
