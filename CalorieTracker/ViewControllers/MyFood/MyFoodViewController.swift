@@ -31,7 +31,7 @@ class TitleStackView: UIStackView {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: UIFont.preferredFont(forTextStyle: .largeTitle).pointSize, weight: .heavy)
-        label.text = "My Foods"
+        label.text = ""
         label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -53,14 +53,26 @@ class TitleStackView: UIStackView {
 
 
 class MyFoodViewController: UIViewController {
-    @IBOutlet weak var tableView: UITableView!
     let cellId = "FoodCell"
     var viewModel = MyFoodViewModel()
+    let tableView = UITableView()
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
+       configureTableView()
         setupView()
+        tableView.allowsSelectionDuringEditing = true
+        viewModel.fetchData {
+            tableView.reloadData()
+        }
+    }
+    
+    func configureTableView(){
+        tableView.delegate = self
+               tableView.dataSource = self
+        view.addSubview(tableView)
+        tableView.rowHeight = 100
+        tableView.pin(to:view)
+        tableView.register(FoodCell.self, forCellReuseIdentifier: cellId)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -84,35 +96,34 @@ class MyFoodViewController: UIViewController {
     }
     
     @objc func editSelector(_ sender:UIButton!){
-        guard self.viewModel.foods?.isEmpty  != true else { return }
+        guard self.viewModel.foods.isEmpty  != true else { return }
         if(self.tableView.isEditing == true)
         {
-            self.tableView.isEditing = false
+            self.tableView.setEditing(false, animated: true)
             self.titleStackView.button.setTitle("Edit", for: .normal)
         }
         else
         {
-            self.tableView.isEditing = true
+            self.tableView.setEditing(true, animated: true)
             self.titleStackView.button.setTitle("Done", for: .normal)
         }
     }
     
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        guard let movedObjTemp = viewModel.foods?[sourceIndexPath.row] else { return }
-        viewModel.foods?.remove(at: sourceIndexPath.row)
-        viewModel.foods?.insert(movedObjTemp, at: destinationIndexPath.row)
-    }
-    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
-            viewModel.foods?.remove(at: indexPath.row)
+            viewModel.remove(index: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            if viewModel.foods.count == 0{
+                self.titleStackView.button.setTitle("Edit", for: .normal)
+                tableView.setEditing(false, animated: true)
+            }
         }
     }
     
     lazy var titleStackView: TitleStackView = {
         let titleStackView = TitleStackView(frame: CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: 44.0)))
         titleStackView.button.addTarget(self, action: #selector(self.editSelector(_:)), for: .touchUpInside)
+        titleStackView.titleLabel.text = "My Food"
         titleStackView.translatesAutoresizingMaskIntoConstraints = false
         return titleStackView
     }()
@@ -175,19 +186,21 @@ class MyFoodViewController: UIViewController {
 
 extension MyFoodViewController:UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.foods?.count ?? 0
+        return viewModel.foods.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId) as! RoundedTableViewCell
-        guard let food = self.viewModel.foods?[indexPath.row] else { return UITableViewCell()}
-        cell.foodLabel.text = food.name
-        cell.calorieLabel.text = String(food.calories)
-        cell.foodImageView.image = UIImage(data: food.image)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId) as! FoodCell
+        let food = self.viewModel.foods[indexPath.row]
+        let caloriesString = String(food.calories)
+        cell.foodTitleLabel.text = "\(food.name ?? "")" + "  |  " + "\(caloriesString)"
+        if let data = food.image{
+            cell.foodImageView.image = UIImage(data: data)
+        }
         return cell
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-         return 1
+        return 1
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -204,4 +217,15 @@ extension MyFoodViewController:UITableViewDataSource{
 }
 
 extension MyFoodViewController:UITableViewDelegate{
+}
+
+
+extension UIView{
+    func pin(to superView:UIView){
+        translatesAutoresizingMaskIntoConstraints = false
+        topAnchor.constraint(equalTo: superView.topAnchor).isActive = true
+        leadingAnchor.constraint(equalTo: superView.leadingAnchor).isActive = true
+        trailingAnchor.constraint(equalTo: superView.trailingAnchor).isActive = true
+        bottomAnchor.constraint(equalTo: superView.bottomAnchor).isActive = true
+    }
 }

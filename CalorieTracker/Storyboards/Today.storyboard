@@ -7,21 +7,100 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Today View Controller-->
         <scene sceneID="IvA-pE-T6D">
             <objects>
-                <viewController id="xJF-ua-djJ" sceneMemberID="viewController">
+                <viewController id="xJF-ua-djJ" customClass="TodayViewController" customModule="CalorieTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XJ9-kr-Xp7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ysg-iE-tua">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" red="0.91372549020000005" green="0.4549019608" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodaySummaryCell" rowHeight="100" id="HYT-rI-hys" customClass="TodaySummaryCell" customModule="CalorieTracker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HYT-rI-hys" id="SMF-Lr-1Tf">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" id="sWp-wo-AiK">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9yJ-lf-j8e">
+                                                            <rect key="frame" x="15" y="6" width="116" height="79"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2810" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Iu-Af-2Qf">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="59.5" height="31.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0XH-Bz-m6B">
+                                                                    <rect key="frame" x="0.0" y="39.5" width="116" height="39.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="116" id="ZEr-aG-Jk8"/>
+                                                                <constraint firstAttribute="height" constant="79" id="gLJ-JT-I0o"/>
+                                                            </constraints>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.9137254901960784" green="0.45490196078431372" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="9yJ-lf-j8e" firstAttribute="leading" secondItem="sWp-wo-AiK" secondAttribute="leading" constant="15" id="5hC-WA-xZZ"/>
+                                                        <constraint firstAttribute="bottom" secondItem="9yJ-lf-j8e" secondAttribute="bottom" constant="15" id="zdV-HJ-3jX"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.91372549020000005" green="0.4549019608" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <connections>
+                                            <outlet property="calories" destination="0Iu-Af-2Qf" id="S4O-YN-lBY"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ysg-iE-tua" firstAttribute="bottom" secondItem="8GU-kk-2g3" secondAttribute="bottom" id="426-xg-a4O"/>
+                            <constraint firstItem="ysg-iE-tua" firstAttribute="trailing" secondItem="8GU-kk-2g3" secondAttribute="trailing" id="XiM-XO-ukY"/>
+                            <constraint firstItem="ysg-iE-tua" firstAttribute="top" secondItem="8GU-kk-2g3" secondAttribute="top" id="g0h-jT-L8g"/>
+                            <constraint firstItem="ysg-iE-tua" firstAttribute="leading" secondItem="8GU-kk-2g3" secondAttribute="leading" id="tgJ-zm-fjQ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="8GU-kk-2g3"/>
                     </view>
                     <navigationItem key="navigationItem" id="RfU-BU-0WI"/>
+                    <connections>
+                        <outlet property="tableView" destination="ysg-iE-tua" id="i6R-79-w4g"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CLr-15-m9C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1089.8550724637682" y="59.598214285714285"/>
+        </scene>
+        <!--Add Food Today View Controller-->
+        <scene sceneID="LYI-dd-gAO">
+            <objects>
+                <viewController storyboardIdentifier="AddFood" id="h0N-Cs-CRD" customClass="AddFoodTodayViewController" customModule="CalorieTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ckT-KX-Lmg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="qBn-rC-FMj"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Mz-dA-LmN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1934" y="34"/>
         </scene>
         <!--Today-->
         <scene sceneID="p1e-GO-yE7">
@@ -30,9 +109,13 @@
                     <tabBarItem key="tabBarItem" title="Today" image="icons8-today" id="bBa-Vx-xQg"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="hDS-XY-DB3">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hDS-XY-DB3">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.91372549020000005" green="0.4549019608" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

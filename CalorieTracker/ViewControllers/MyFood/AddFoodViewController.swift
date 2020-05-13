@@ -21,18 +21,14 @@ class AddFoodViewController: UIViewController {
     @IBAction func addFood(_ sender: Any) {
         guard let _food = foodNameTextField.text, let _calories = caloriesTextField.text, !(foodNameTextField.text?.isEmpty ?? false), !(caloriesTextField.text?.isEmpty ?? false), let _image = pickedImage else { return }
         guard let data = _image.pngData() else { return }
-        viewModel?.addFood(name: _food, calories: Int(_calories) ?? 0, data: data)
+        viewModel.addFood(name: _food, calories: Int(_calories) ?? 0, data: data)
         self.navigationController?.popViewController(animated: true)
     }
     
-    var viewModel:MyFoodViewModel?
-    
+    var viewModel:MyFoodViewModel = MyFoodViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         cardView.layer.cornerRadius = 5
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         imageView.isUserInteractionEnabled = true
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         imageView.addGestureRecognizer(tapGestureRecognizer)
@@ -59,20 +55,6 @@ class AddFoodViewController: UIViewController {
         }))
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:nil))
         self.present(actionSheet, animated: true, completion: nil)
-    }
-    
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height
-            }
-        }
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
-        }
     }
 }
 

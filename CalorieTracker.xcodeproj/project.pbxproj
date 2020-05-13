@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		881680B8246BCCB500C76A2E /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881680B7246BCCB500C76A2E /* FoodCell.swift */; };
+		881680BB246BD14C00C76A2E /* AddFoodTodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881680BA246BD14C00C76A2E /* AddFoodTodayViewController.swift */; };
 		8822BF8A246B425300B73961 /* MyFoodViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8822BF89246B425300B73961 /* MyFoodViewControllerViewModel.swift */; };
 		8822BF8C246B725A00B73961 /* PersistanceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8822BF8B246B725A00B73961 /* PersistanceService.swift */; };
+		8822BF8F246B752800B73961 /* Food+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8822BF8D246B752800B73961 /* Food+CoreDataClass.swift */; };
+		8822BF90246B752800B73961 /* Food+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8822BF8E246B752800B73961 /* Food+CoreDataProperties.swift */; };
 		8826C0F1246B1354005D4D08 /* TrendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8826C0F0246B1354005D4D08 /* TrendsViewController.swift */; };
 		8826C0F3246B1360005D4D08 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8826C0F2246B1360005D4D08 /* TodayViewController.swift */; };
 		8858458A246B0C60008BF66A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88584589246B0C60008BF66A /* AppDelegate.swift */; };
@@ -23,8 +27,9 @@
 		885845BD246B0D3F008BF66A /* MyFood.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 885845BC246B0D3F008BF66A /* MyFood.storyboard */; };
 		885845BF246B0D90008BF66A /* Today.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 885845BE246B0D90008BF66A /* Today.storyboard */; };
 		885845C1246B0DD6008BF66A /* Trends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 885845C0246B0DD6008BF66A /* Trends.storyboard */; };
-		88BE4795246B170500728B13 /* RoundedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BE4794246B170500728B13 /* RoundedTableViewCell.swift */; };
 		88BE4797246B3FDD00728B13 /* AddFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BE4796246B3FDD00728B13 /* AddFoodViewController.swift */; };
+		88C6F5C3246B88BF0098D66D /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C6F5C2246B88BF0098D66D /* TodayViewModel.swift */; };
+		88FDA3B8246C55E8006D2EB1 /* TodaySummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FDA3B7246C55E8006D2EB1 /* TodaySummaryCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,8 +50,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		881680B7246BCCB500C76A2E /* FoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
+		881680BA246BD14C00C76A2E /* AddFoodTodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodTodayViewController.swift; sourceTree = "<group>"; };
 		8822BF89246B425300B73961 /* MyFoodViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFoodViewControllerViewModel.swift; sourceTree = "<group>"; };
 		8822BF8B246B725A00B73961 /* PersistanceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceService.swift; sourceTree = "<group>"; };
+		8822BF8D246B752800B73961 /* Food+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataClass.swift"; sourceTree = "<group>"; };
+		8822BF8E246B752800B73961 /* Food+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8826C0F0246B1354005D4D08 /* TrendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendsViewController.swift; sourceTree = "<group>"; };
 		8826C0F2246B1360005D4D08 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		88584586246B0C60008BF66A /* CalorieTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalorieTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,8 +76,9 @@
 		885845BC246B0D3F008BF66A /* MyFood.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyFood.storyboard; sourceTree = "<group>"; };
 		885845BE246B0D90008BF66A /* Today.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Today.storyboard; sourceTree = "<group>"; };
 		885845C0246B0DD6008BF66A /* Trends.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Trends.storyboard; sourceTree = "<group>"; };
-		88BE4794246B170500728B13 /* RoundedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTableViewCell.swift; sourceTree = "<group>"; };
 		88BE4796246B3FDD00728B13 /* AddFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodViewController.swift; sourceTree = "<group>"; };
+		88C6F5C2246B88BF0098D66D /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
+		88FDA3B7246C55E8006D2EB1 /* TodaySummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySummaryCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +106,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		881680B9246BD0E900C76A2E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				881680B7246BCCB500C76A2E /* FoodCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8822BF91246B7A6B00B73961 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8822BF8D246B752800B73961 /* Food+CoreDataClass.swift */,
+				8822BF8E246B752800B73961 /* Food+CoreDataProperties.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		8826C0EF246B12C4005D4D08 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,7 +139,7 @@
 			children = (
 				88BE4798246B3FE500728B13 /* MyFood */,
 				8826C0F0246B1354005D4D08 /* TrendsViewController.swift */,
-				8826C0F2246B1360005D4D08 /* TodayViewController.swift */,
+				88C6F5C1246B88AD0098D66D /* Today */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -140,10 +167,11 @@
 		88584588246B0C60008BF66A /* CalorieTracker */ = {
 			isa = PBXGroup;
 			children = (
+				881680B9246BD0E900C76A2E /* Views */,
+				8822BF91246B7A6B00B73961 /* Models */,
 				88584589246B0C60008BF66A /* AppDelegate.swift */,
 				8822BF8B246B725A00B73961 /* PersistanceService.swift */,
 				8858458B246B0C60008BF66A /* SceneDelegate.swift */,
-				88BE4794246B170500728B13 /* RoundedTableViewCell.swift */,
 				8826C0F4246B1368005D4D08 /* ViewControllers */,
 				8826C0EF246B12C4005D4D08 /* Storyboards */,
 				88584595246B0C61008BF66A /* Assets.xcassets */,
@@ -180,6 +208,17 @@
 				8822BF89246B425300B73961 /* MyFoodViewControllerViewModel.swift */,
 			);
 			path = MyFood;
+			sourceTree = "<group>";
+		};
+		88C6F5C1246B88AD0098D66D /* Today */ = {
+			isa = PBXGroup;
+			children = (
+				8826C0F2246B1360005D4D08 /* TodayViewController.swift */,
+				881680BA246BD14C00C76A2E /* AddFoodTodayViewController.swift */,
+				88FDA3B7246C55E8006D2EB1 /* TodaySummaryCell.swift */,
+				88C6F5C2246B88BF0098D66D /* TodayViewModel.swift */,
+			);
+			path = Today;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,14 +357,19 @@
 			files = (
 				8858458E246B0C60008BF66A /* MyFoodViewController.swift in Sources */,
 				8858458A246B0C60008BF66A /* AppDelegate.swift in Sources */,
-				88BE4795246B170500728B13 /* RoundedTableViewCell.swift in Sources */,
+				8822BF8F246B752800B73961 /* Food+CoreDataClass.swift in Sources */,
+				88C6F5C3246B88BF0098D66D /* TodayViewModel.swift in Sources */,
+				881680B8246BCCB500C76A2E /* FoodCell.swift in Sources */,
 				8822BF8A246B425300B73961 /* MyFoodViewControllerViewModel.swift in Sources */,
 				8826C0F3246B1360005D4D08 /* TodayViewController.swift in Sources */,
 				88584594246B0C60008BF66A /* CalorieTracker.xcdatamodeld in Sources */,
 				8826C0F1246B1354005D4D08 /* TrendsViewController.swift in Sources */,
+				88FDA3B8246C55E8006D2EB1 /* TodaySummaryCell.swift in Sources */,
 				88BE4797246B3FDD00728B13 /* AddFoodViewController.swift in Sources */,
 				8858458C246B0C60008BF66A /* SceneDelegate.swift in Sources */,
 				8822BF8C246B725A00B73961 /* PersistanceService.swift in Sources */,
+				881680BB246BD14C00C76A2E /* AddFoodTodayViewController.swift in Sources */,
+				8822BF90246B752800B73961 /* Food+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,24 +8,41 @@
 
 import Foundation
 
-struct Food{
-    var name:String
-    var calories:Int
-    var image:Data
-}
+
+import CoreData
 
 class MyFoodViewModel{
-    var foods:[Food]?
-    
-    init() {
-        //handle cache here later
-        if foods == nil{
-            foods = [Food]()
+    var foods:[Food] = [Food]()
+
+    func fetchData(completion:()->()){
+        let fetchRequest:NSFetchRequest<Food> = Food.fetchRequest()
+        let predicate = NSPredicate(format: "lastEaten == nil")
+        fetchRequest.predicate = predicate
+        do{
+            let foods = try PersistenceService.context.fetch(fetchRequest)
+            self.foods = foods
+        } catch{
         }
+        completion()
     }
     
     func addFood(name:String, calories:Int, data:Data){
-        let food = Food(name: name, calories: calories, image:data)
-        foods?.append(food)
+        let food = Food(context: PersistenceService.context)
+        food.image = data
+        food.name = name
+        food.calories = Int16(calories)
+        PersistenceService.saveContext()
+        foods.append(food)
+    }
+    
+    func remove(index:Int){
+        let context = PersistenceService.context
+        context.delete(foods[index] as NSManagedObject)
+        self.foods.remove(at: index)
+        do{
+            try context.save()}
+        catch{
+        
+        }
     }
 }
