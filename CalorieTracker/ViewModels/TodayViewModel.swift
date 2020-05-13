@@ -60,6 +60,21 @@ class TodayViewModel{
         return value
     }
     
+    func remove(food:Food){
+        let context = PersistenceService.context
+        let index = foodsEatenToday.firstIndex(where: { (_food) -> Bool in
+             return _food.name == food.name && food.calories == _food.calories
+        })
+        
+        guard let _index = index else { return }
+        context.delete(foodsEatenToday[_index] as NSManagedObject)
+        self.foodsEatenToday.remove(at: _index)
+        do{
+            try context.save()}
+        catch{
+            
+        }
+    }
     
     func remove(index:Int){
         let context = PersistenceService.context

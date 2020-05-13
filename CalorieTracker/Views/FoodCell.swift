@@ -21,10 +21,6 @@ class FoodCell: UITableViewCell {
         configureTitleLabel()
         setImageConstraints()
         setTitleLabelConstraints()
-        
-        if link != nil{
-            
-        }
     }
     
     @objc private func handleMarkAsFavorite(){
@@ -35,7 +31,7 @@ class FoodCell: UITableViewCell {
     func addLink(_ _link: AddFoodTodayViewController){
         link = _link
         let starButton = UIButton(type: .system)
-            starButton.setImage(UIImage(named: "fav_star"), for: .normal)
+            starButton.setImage(UIImage(named: "check_mark"), for: .normal)
             starButton.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
             starButton.tintColor = .red
             accessoryView = starButton
