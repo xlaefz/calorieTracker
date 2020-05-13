@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fUq-Yc-m6l">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="sR5-fH-FcC">
+            <objects>
+                <viewController id="xhY-Yk-OrN" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RDo-Pq-XGB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="Au1-PN-kup"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="BZH-Xj-63v"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AV5-uO-ubP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1026.0869565217392" y="22.767857142857142"/>
+        </scene>
+        <!--Trends-->
+        <scene sceneID="WvQ-0b-Z6c">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fUq-Yc-m6l" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Trends" image="icons8-line-chart" id="Frz-4L-I2U"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Mhn-Mc-38g">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="xhY-Yk-OrN" kind="relationship" relationship="rootViewController" id="6dv-eD-6qG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B38-pE-PlG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="115.94202898550725" y="22.767857142857142"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icons8-line-chart" width="25" height="25"/>
+    </resources>
+</document>

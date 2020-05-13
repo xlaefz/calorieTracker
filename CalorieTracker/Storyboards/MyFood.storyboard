@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8lT-RW-Gmk">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--My Food View Controller-->
+        <scene sceneID="JdJ-24-Xv3">
+            <objects>
+                <viewController id="MeM-B9-w7j" customClass="MyFoodViewController" customModule="CalorieTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7pI-Hg-wpw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cSC-R2-DTZ">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FoodCell" rowHeight="95" id="7us-l9-Dps" customClass="RoundedTableViewCell" customModule="CalorieTracker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="95"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7us-l9-Dps" id="YM3-eO-4re">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="95"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yyO-j2-1gr">
+                                                    <rect key="frame" x="10" y="11" width="68" height="68"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="68" id="7If-4g-ZHO"/>
+                                                        <constraint firstAttribute="width" constant="68" id="GmN-RR-a9z"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="6Rx-ND-xcP">
+                                                    <rect key="frame" x="108" y="20" width="271" height="54"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tj9-kW-Yye">
+                                                            <rect key="frame" x="0.0" y="0.0" width="66.5" height="33.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6g0-3p-fWE">
+                                                            <rect key="frame" x="0.0" y="33.5" width="42" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="6Rx-ND-xcP" secondAttribute="bottom" constant="10" id="Kan-9x-goV"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="6Rx-ND-xcP" secondAttribute="trailing" constant="15" id="Mca-y3-M6B"/>
+                                                <constraint firstAttribute="bottom" secondItem="yyO-j2-1gr" secondAttribute="bottom" constant="16" id="XOE-UX-7za"/>
+                                                <constraint firstItem="6Rx-ND-xcP" firstAttribute="top" secondItem="YM3-eO-4re" secondAttribute="topMargin" constant="9" id="aFj-7C-nIo"/>
+                                                <constraint firstItem="yyO-j2-1gr" firstAttribute="top" secondItem="YM3-eO-4re" secondAttribute="top" constant="11" id="dTY-dG-DPV"/>
+                                                <constraint firstItem="yyO-j2-1gr" firstAttribute="leading" secondItem="YM3-eO-4re" secondAttribute="leading" constant="10" id="kZd-iS-EZ7"/>
+                                                <constraint firstItem="6Rx-ND-xcP" firstAttribute="leading" secondItem="yyO-j2-1gr" secondAttribute="trailing" constant="30" id="y1m-a0-JIL"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="calorieLabel" destination="6g0-3p-fWE" id="AMM-68-yMd"/>
+                                            <outlet property="foodImageView" destination="yyO-j2-1gr" id="pkL-k8-CFp"/>
+                                            <outlet property="foodLabel" destination="Tj9-kW-Yye" id="mhU-pt-hv6"/>
+                                            <outlet property="imageView" destination="yyO-j2-1gr" id="lTW-2d-GpS"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="cSC-R2-DTZ" firstAttribute="leading" secondItem="zBu-SK-jej" secondAttribute="leading" id="HHh-cj-fFb"/>
+                            <constraint firstItem="zBu-SK-jej" firstAttribute="trailing" secondItem="cSC-R2-DTZ" secondAttribute="trailing" id="JG1-x8-SgH"/>
+                            <constraint firstItem="zBu-SK-jej" firstAttribute="bottom" secondItem="cSC-R2-DTZ" secondAttribute="bottom" id="Q0l-xQ-tQG"/>
+                            <constraint firstItem="cSC-R2-DTZ" firstAttribute="top" secondItem="zBu-SK-jej" secondAttribute="top" id="f0I-vx-YRW"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="zBu-SK-jej"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="0ze-Z9-jmP"/>
+                    <connections>
+                        <outlet property="tableView" destination="cSC-R2-DTZ" id="4ul-5O-pZt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RbP-j2-KgO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2230.434782608696" y="-505.58035714285711"/>
+        </scene>
+        <!--Add Food View Controller-->
+        <scene sceneID="HA3-iH-2qv">
+            <objects>
+                <viewController storyboardIdentifier="AddFood" id="gSd-Y1-dLy" customClass="AddFoodViewController" customModule="CalorieTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Bq4-ze-euT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G1H-XC-j0O">
+                                <rect key="frame" x="20" y="74" width="374" height="369"/>
+                                <userGuides>
+                                    <userLayoutGuide location="16" affinity="minX"/>
+                                    <userLayoutGuide location="358" affinity="minX"/>
+                                </userGuides>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zQI-17-OlF">
+                                        <rect key="frame" x="15" y="15" width="344" height="334"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="AVK-V2-EG0">
+                                                <rect key="frame" x="0.0" y="0.0" width="344" height="62"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7f-as-dPT">
+                                                        <rect key="frame" x="0.0" y="0.0" width="344" height="29"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="29" id="e3s-U8-iWw"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="atc-dN-aGZ">
+                                                        <rect key="frame" x="0.0" y="33" width="344" height="29"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Dgh-Pg-V4q">
+                                                <rect key="frame" x="0.0" y="70" width="344" height="67"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calories" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FV3-JJ-ezY">
+                                                        <rect key="frame" x="0.0" y="0.0" width="344" height="31.5"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="31.5" id="sy8-26-WQE"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nhS-ox-awU">
+                                                        <rect key="frame" x="0.0" y="35.5" width="344" height="31.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="kV1-H9-AEM">
+                                                <rect key="frame" x="0.0" y="145.5" width="344" height="149"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="151" id="ozf-SV-Kvq"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N6V-9c-DJx">
+                                                <rect key="frame" x="0.0" y="304" width="344" height="30"/>
+                                                <color key="backgroundColor" red="0.91397792100906372" green="0.45516180992126465" blue="0.48631954193115234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="9gR-ZH-CYc"/>
+                                                </constraints>
+                                                <state key="normal" title="Add">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="addFood:" destination="gSd-Y1-dLy" eventType="touchUpInside" id="gZv-2c-eQZ"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="369" id="359-52-pnr"/>
+                                    <constraint firstItem="zQI-17-OlF" firstAttribute="leading" secondItem="G1H-XC-j0O" secondAttribute="leading" constant="15" id="7tG-xw-Ps2"/>
+                                    <constraint firstItem="zQI-17-OlF" firstAttribute="top" secondItem="G1H-XC-j0O" secondAttribute="top" constant="15" id="DXK-9i-EOx"/>
+                                    <constraint firstAttribute="trailing" secondItem="zQI-17-OlF" secondAttribute="trailing" constant="15" id="FYS-33-ewN"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="G1H-XC-j0O" firstAttribute="top" secondItem="F3g-Aj-pbc" secondAttribute="top" constant="30" id="3bo-rP-p3w"/>
+                            <constraint firstItem="F3g-Aj-pbc" firstAttribute="trailing" secondItem="G1H-XC-j0O" secondAttribute="trailing" constant="20" id="ggL-mP-Pu3"/>
+                            <constraint firstItem="G1H-XC-j0O" firstAttribute="leading" secondItem="F3g-Aj-pbc" secondAttribute="leading" constant="20" id="vMX-iC-D9x"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="F3g-Aj-pbc"/>
+                    </view>
+                    <connections>
+                        <outlet property="caloriesTextField" destination="nhS-ox-awU" id="iWE-vm-0KM"/>
+                        <outlet property="cardView" destination="G1H-XC-j0O" id="YsZ-0P-odZ"/>
+                        <outlet property="foodNameTextField" destination="atc-dN-aGZ" id="EhJ-0g-hYz"/>
+                        <outlet property="imageView" destination="kV1-H9-AEM" id="OOR-XJ-uIz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8D2-wN-okw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3007.2463768115945" y="-503.57142857142856"/>
+        </scene>
+        <!--My Food-->
+        <scene sceneID="VLn-I7-B4T">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8lT-RW-Gmk" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="My Food" image="icons8-healthy-food" id="wpT-lS-0eV"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FPm-cY-zqn">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="MeM-B9-w7j" kind="relationship" relationship="rootViewController" id="IUF-bt-IUi"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BXU-jx-0lj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1321.7391304347827" y="-505.58035714285711"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="camera" catalog="system" width="128" height="96"/>
+        <image name="icons8-healthy-food" width="21.666666030883789" height="21.666666030883789"/>
+    </resources>
+</document>
