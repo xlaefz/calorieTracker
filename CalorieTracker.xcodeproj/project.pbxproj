@@ -17,6 +17,8 @@
 		8826C0F1246B1354005D4D08 /* TrendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8826C0F0246B1354005D4D08 /* TrendsViewController.swift */; };
 		8826C0F3246B1360005D4D08 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8826C0F2246B1360005D4D08 /* TodayViewController.swift */; };
 		884C85FF246DFCCC00F86396 /* TableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884C85FE246DFCCC00F86396 /* TableViewExtensions.swift */; };
+		884C8602246E035E00F86396 /* ChartXAxisFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884C8601246E035E00F86396 /* ChartXAxisFormatter.swift */; };
+		884C8604246E052F00F86396 /* ChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884C8603246E052F00F86396 /* ChartTableViewCell.swift */; };
 		8858458A246B0C60008BF66A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88584589246B0C60008BF66A /* AppDelegate.swift */; };
 		8858458C246B0C60008BF66A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8858458B246B0C60008BF66A /* SceneDelegate.swift */; };
 		8858458E246B0C60008BF66A /* MyFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8858458D246B0C60008BF66A /* MyFoodViewController.swift */; };
@@ -81,6 +83,8 @@
 		8826C0F0246B1354005D4D08 /* TrendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendsViewController.swift; sourceTree = "<group>"; };
 		8826C0F2246B1360005D4D08 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		884C85FE246DFCCC00F86396 /* TableViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewExtensions.swift; sourceTree = "<group>"; };
+		884C8601246E035E00F86396 /* ChartXAxisFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartXAxisFormatter.swift; sourceTree = "<group>"; };
+		884C8603246E052F00F86396 /* ChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTableViewCell.swift; sourceTree = "<group>"; };
 		88584586246B0C60008BF66A /* CalorieTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalorieTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88584589246B0C60008BF66A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8858458B246B0C60008BF66A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -211,6 +215,14 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		884C8600246E034D00F86396 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				884C8601246E035E00F86396 /* ChartXAxisFormatter.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		8858457D246B0C60008BF66A = {
 			isa = PBXGroup;
 			children = (
@@ -239,6 +251,7 @@
 				88FDA3BA246C8320006D2EB1 /* CalorieTracker.entitlements */,
 				88584589246B0C60008BF66A /* AppDelegate.swift */,
 				8858458B246B0C60008BF66A /* SceneDelegate.swift */,
+				884C8600246E034D00F86396 /* Utility */,
 				88D42944246DBC3B007F6AF6 /* Extensions */,
 				88D4293F246DBBBB007F6AF6 /* Persistence Service */,
 				88FDA3B9246C8288006D2EB1 /* ViewModels */,
@@ -342,6 +355,7 @@
 			isa = PBXGroup;
 			children = (
 				8826C0F0246B1354005D4D08 /* TrendsViewController.swift */,
+				884C8603246E052F00F86396 /* ChartTableViewCell.swift */,
 			);
 			path = Trends;
 			sourceTree = "<group>";
@@ -593,9 +607,11 @@
 				88D42943246DBC2D007F6AF6 /* UIViewExtensions.swift in Sources */,
 				8858458A246B0C60008BF66A /* AppDelegate.swift in Sources */,
 				88D42941246DBBFD007F6AF6 /* TitleStackView.swift in Sources */,
+				884C8604246E052F00F86396 /* ChartTableViewCell.swift in Sources */,
 				8822BF8F246B752800B73961 /* Food+CoreDataClass.swift in Sources */,
 				88D4293E246D2DFF007F6AF6 /* FeedbackGenerators.swift in Sources */,
 				88D42946246DBC60007F6AF6 /* StringExtensions.swift in Sources */,
+				884C8602246E035E00F86396 /* ChartXAxisFormatter.swift in Sources */,
 				88C6F5C3246B88BF0098D66D /* TodayViewModel.swift in Sources */,
 				884C85FF246DFCCC00F86396 /* TableViewExtensions.swift in Sources */,
 				88D4294E246DF217007F6AF6 /* PageCell.swift in Sources */,

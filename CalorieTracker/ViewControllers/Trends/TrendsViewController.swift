@@ -19,22 +19,24 @@ class TrendsViewController: UIViewController, ChartViewDelegate {
         let yAxis = chartView.leftAxis
         yAxis.labelFont = .boldSystemFont(ofSize: 12)
         yAxis.setLabelCount(6, force: false)
-        yAxis.labelTextColor = .systemGray3
+        yAxis.labelTextColor = .white //.systemGray3
         yAxis.axisLineColor = .white
         yAxis.labelPosition = .outsideChart
         yAxis.drawGridLinesEnabled = false
         chartView.xAxis.labelPosition = .bottom
         chartView.xAxis.labelFont = .boldSystemFont(ofSize: 12)
         chartView.xAxis.setLabelCount(1, force: false)
-        chartView.xAxis.labelTextColor = .systemGray3
+        chartView.xAxis.labelTextColor = .white //.systemGray3
         chartView.xAxis.axisLineColor = .white
         chartView.xAxis.drawGridLinesEnabled = false
         chartView.xAxis.labelRotationAngle = -45
         chartView.animate(xAxisDuration: 0.5)
+        chartView.backgroundColor = UIColor.backgroundColor
         
         return chartView
     }()
     let viewModel = TrendsViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.fetchData()
@@ -43,6 +45,11 @@ class TrendsViewController: UIViewController, ChartViewDelegate {
         lineChartView.width(to: view)
         lineChartView.heightToWidth(of: view)
         setData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.fetchData()
     }
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
@@ -59,8 +66,6 @@ class TrendsViewController: UIViewController, ChartViewDelegate {
         if let minTimeInterval = (data.map { $0.date.timeIntervalSince1970 }).min() {
             referenceTimeInterval = minTimeInterval
         }
-        
-        
         // Define chart xValues formatter
         let formatter = DateFormatter()
         formatter.dateStyle = .short
@@ -81,7 +86,7 @@ class TrendsViewController: UIViewController, ChartViewDelegate {
             let entry = ChartDataEntry(x: xValue, y: Double(yValue))
             entries.append(entry)
         }
-        let set1 = LineChartDataSet(entries: entries, label: "Running 7 Days Calories")
+        let set1 = LineChartDataSet(entries: entries, label: "")
         set1.mode = .cubicBezier
         set1.circleRadius = 3
         set1.setCircleColor(UIColor(rgbColorCodeRed: 233, green: 116, blue: 124, alpha: 1))
@@ -99,42 +104,5 @@ class TrendsViewController: UIViewController, ChartViewDelegate {
         lineChartView.data = data2
     }
     
-    let yValues:[ChartDataEntry] = [
-        ChartDataEntry(x: 0, y: 10),
-        ChartDataEntry(x: 1, y: 5),
-        ChartDataEntry(x: 2, y: 7),
-        ChartDataEntry(x: 3, y: 5),
-        //        ChartDataEntry(x: 4, y: 10),
-        //        ChartDataEntry(x: 5, y: 6),
-        //        ChartDataEntry(x: 6, y: 5),
-    ]
-    
 }
 
-
-class ChartXAxisFormatter: NSObject {
-    fileprivate var dateFormatter: DateFormatter?
-    fileprivate var referenceTimeInterval: TimeInterval?
-    
-    convenience init(referenceTimeInterval: TimeInterval, dateFormatter: DateFormatter) {
-        self.init()
-        self.referenceTimeInterval = referenceTimeInterval
-        self.dateFormatter = dateFormatter
-    }
-}
-
-
-extension ChartXAxisFormatter: IAxisValueFormatter {
-    
-    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        guard let dateFormatter = dateFormatter,
-            let referenceTimeInterval = referenceTimeInterval
-            else {
-                return ""
-        }
-        
-        let date = Date(timeIntervalSince1970: value * 3600 * 24 + referenceTimeInterval)
-        return dateFormatter.string(from: date)
-    }
-    
-}

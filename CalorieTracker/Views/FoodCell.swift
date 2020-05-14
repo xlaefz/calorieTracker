@@ -81,7 +81,6 @@ class FoodCell: UITableViewCell {
     func setImageConstraints(){
         foodImageView.translatesAutoresizingMaskIntoConstraints = false
         foodImageView.topAnchor.constraint(equalTo: cardView.topAnchor).isActive = true
-//        foodImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         foodImageView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor).isActive = true
         foodImageView.heightAnchor.constraint(equalToConstant: self.bounds.size.height+50).isActive = true
         foodImageView.widthAnchor.constraint(equalTo: foodImageView.heightAnchor, multiplier: 1).isActive = true

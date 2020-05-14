@@ -37,11 +37,9 @@ class AddFoodTodayViewController: UIViewController {
         guard let food = viewModel?.foods[indexPathClickedOn.row] else { return }
         let hasFavorited = viewModel?.foodsToAdd.contains(food) ?? false
         if hasFavorited{
-//            viewModel?.foodsToAdd.remove(food)
             viewModel?.remove(food: food)
         }
         else{
-//            viewModel?.foodsToAdd.insert(food)
             viewModel?.addFood(food: food)
         }
         tableView.reloadRows(at: [indexPathClickedOn], with: .automatic)
@@ -57,11 +55,7 @@ extension AddFoodTodayViewController:UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FoodCell") as! FoodCell
         guard let food = self.viewModel?.foods[indexPath.row] else { return UITableViewCell() }
-        let caloriesString = String(food.calories)
-        cell.foodTitleLabel.text = "\(food.name ?? "")" + "  |  " + "\(caloriesString)"
-        if let data = food.image{
-            cell.foodImageView.image = UIImage(data: data)
-        }
+        cell.setUpCellWithFood(food)
         cell.addLink(self)
         cell.accessoryView?.tintColor = viewModel?.foodsToAdd.contains(food) == true ? .green :.lightGray
         return cell

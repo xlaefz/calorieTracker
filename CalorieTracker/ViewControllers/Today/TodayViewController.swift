@@ -52,11 +52,11 @@ class TodayViewController: UIViewController {
         viewModel.fetchData()
         self.navigationController?.navigationBar.backgroundColor = UIColor.backgroundColor
         navigationController?.navigationBar.barTintColor = UIColor.backgroundColor
-
+        
         self.navigationController?.navigationBar.layoutIfNeeded()
         tableView.separatorColor = .clear
         tableView.register(TodaySummaryCell.self, forCellReuseIdentifier: "SummaryCell")
-
+        
         tableView.register(FoodCell.self, forCellReuseIdentifier: "FoodCell")
     }
     
@@ -88,19 +88,24 @@ class TodayViewController: UIViewController {
     }()
     
     @objc func fabTapped(_ button: UIButton) {
+        if viewModel.foods.count == 0{
+            let parent = self.parent?.parent as! UITabBarController
+            parent.selectedIndex = 0
+            return
+        }
         UIView.animate(withDuration: 2.0,
-                                   delay: 0,
-                                   usingSpringWithDamping: CGFloat(0.20),
-                                   initialSpringVelocity: CGFloat(6.0),
-                                   options: UIView.AnimationOptions.allowUserInteraction,
-                                   animations: {
-                                    button.transform = CGAffineTransform.identity
-            },
-                                   completion: { Void in()  }
+                       delay: 0,
+                       usingSpringWithDamping: CGFloat(0.20),
+                       initialSpringVelocity: CGFloat(6.0),
+                       options: UIView.AnimationOptions.allowUserInteraction,
+                       animations: {
+                        button.transform = CGAffineTransform.identity
+        },
+                       completion: { Void in()  }
         )
         let storyBoard = UIStoryboard(name: "Today", bundle: nil)
         let vc = storyBoard.instantiateViewController(identifier: "AddFood") as AddFoodTodayViewController
-       vc.viewModel = self.viewModel
+        vc.viewModel = self.viewModel
         
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -129,7 +134,13 @@ extension TodayViewController:UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.foodsEatenToday.count + 1
+        if viewModel.foodsEatenToday.count == 0 {
+            tableView.setEmptyView(title: "Add what you've\neaten today")
+        }
+        else {
+            tableView.restore()
+        }
+        return viewModel.foodsEatenToday.count + 1
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -150,7 +161,7 @@ extension TodayViewController:UITableViewDataSource{
             cell.caloriesToday = calories
             cell.percentageLabel.text = "   \(calories)"
             cell.animate()
-           return cell
+            return cell
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "FoodCell") as! FoodCell
         let food = self.viewModel.foodsEatenToday[indexPath.row-1]
