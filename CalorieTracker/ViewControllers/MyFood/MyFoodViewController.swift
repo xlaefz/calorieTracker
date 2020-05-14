@@ -7,69 +7,35 @@
 //
 
 import UIKit
-
-class TitleStackView: UIStackView {
-    
-    override init(frame: CGRect) {
-        super.init(frame:frame)
-        commonInit()
-    }
-    
-    
-    required init(coder: NSCoder) {
-        super.init(coder: coder)
-        commonInit()
-    }
-    
-    private func commonInit() {
-        axis = .horizontal
-        alignment = .center
-        addArrangedSubview(titleLabel)
-        addArrangedSubview(button)
-    }
-    
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: UIFont.preferredFont(forTextStyle: .largeTitle).pointSize, weight: .heavy)
-        label.text = ""
-        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    lazy var button: UIButton = {
-        let buttonWidth: CGFloat = 50
-        let button = UIButton(frame: CGRect(origin: .zero, size: CGSize(width: buttonWidth, height: buttonWidth)))
-        button.setTitleColor(.systemBlue, for: .normal)
-//        button.setTitle("🖊", for: .normal)
-        button.setTitle("Edit", for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
-        button.heightAnchor.constraint(equalToConstant: buttonWidth).isActive = true
-        button.layer.masksToBounds = true
-        button.isUserInteractionEnabled = true
-        return button
-    }()
-}
-
+import BLTNBoard
 
 class MyFoodViewController: UIViewController {
     let cellId = "FoodCell"
     var viewModel = MyFoodViewModel()
     let tableView = UITableView()
+    var page = TextFieldBulletinPage(title: "New Food")
+    
+    
+    lazy var bulletinManager: BLTNItemManager = {
+        let rootItem: BLTNItem = page // ... create your item here
+        return BLTNItemManager(rootItem: rootItem)
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-       configureTableView()
+        configureTableView()
         setupView()
         tableView.allowsSelectionDuringEditing = true
         viewModel.fetchData {
             tableView.reloadData()
         }
+        
+        
     }
     
     func configureTableView(){
         tableView.delegate = self
-               tableView.dataSource = self
+        tableView.dataSource = self
         view.addSubview(tableView)
         tableView.rowHeight = 100
         tableView.pin(to:view)
@@ -171,10 +137,43 @@ class MyFoodViewController: UIViewController {
     }()
     
     @objc func fabTapped(_ button: UIButton) {
-        let storyBoard = UIStoryboard(name: "MyFood", bundle: nil)
-        let vc = storyBoard.instantiateViewController(identifier: "AddFood") as AddFoodViewController
-        vc.viewModel = self.viewModel
-        self.navigationController?.pushViewController(vc, animated: true)
+        
+        page = TextFieldBulletinPage(title: "New Food")
+        page.descriptionText = "Define a new food to track."
+        page.actionButtonTitle = "Select Image"
+        page.actionHandler = { item in
+            print("Yeet")
+        }
+        page.image = UIImage(named: "fav_star")
+        
+        page.alternativeButtonTitle = "Not now"
+        page.alternativeHandler = {
+            item in
+            self.bulletinManager.dismissBulletin()
+        }
+        bulletinManager = BLTNItemManager(rootItem: page)
+        bulletinManager.showBulletin(above: self)
+
+        button.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+
+        UIView.animate(withDuration: 2.0,
+                                   delay: 0,
+                                   usingSpringWithDamping: CGFloat(0.20),
+                                   initialSpringVelocity: CGFloat(6.0),
+                                   options: UIView.AnimationOptions.allowUserInteraction,
+                                   animations: {
+                                    button.transform = CGAffineTransform.identity
+            },
+                                   completion: { Void in()  }
+        )
+        bulletinManager.popItem()
+        
+        
+        
+//        let storyBoard = UIStoryboard(name: "MyFood", bundle: nil)
+//        let vc = storyBoard.instantiateViewController(identifier: "AddFood") as AddFoodViewController
+//        vc.viewModel = self.viewModel
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func setupButton() {
@@ -200,13 +199,13 @@ extension MyFoodViewController:UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId) as! FoodCell
         let food = self.viewModel.foods[indexPath.row]
         cell.setUpCellWithFood(food)
-//        let caloriesString = String(food.calories)
-//        cell.foodTitleLabel.text = "\(food.name?.capitalized ?? "")"
-//        cell.calorieLabel.text = "\(caloriesString) cal"
-//        if let data = food.image{
-//            cell.foodImageView.image = UIImage(data: data)
-//        }
-//        cell.contentView.backgroundColor = UIColor.clear
+        //        let caloriesString = String(food.calories)
+        //        cell.foodTitleLabel.text = "\(food.name?.capitalized ?? "")"
+        //        cell.calorieLabel.text = "\(caloriesString) cal"
+        //        if let data = food.image{
+        //            cell.foodImageView.image = UIImage(data: data)
+        //        }
+        //        cell.contentView.backgroundColor = UIColor.clear
         return cell
     }
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -227,58 +226,4 @@ extension MyFoodViewController:UITableViewDataSource{
 }
 
 extension MyFoodViewController:UITableViewDelegate{
-}
-
-
-extension UIView{
-    func pin(to superView:UIView){
-        translatesAutoresizingMaskIntoConstraints = false
-        topAnchor.constraint(equalTo: superView.topAnchor).isActive = true
-        leadingAnchor.constraint(equalTo: superView.leadingAnchor).isActive = true
-        trailingAnchor.constraint(equalTo: superView.trailingAnchor).isActive = true
-        bottomAnchor.constraint(equalTo: superView.bottomAnchor).isActive = true
-    }
-    
-    func pin(to superView:UIView, constant:Int){
-        translatesAutoresizingMaskIntoConstraints = false
-        topAnchor.constraint(equalTo: superView.topAnchor, constant: CGFloat(constant)).isActive = true
-        leadingAnchor.constraint(equalTo: superView.leadingAnchor,  constant: CGFloat(constant)).isActive = true
-        trailingAnchor.constraint(equalTo: superView.trailingAnchor,  constant: CGFloat(-constant)).isActive = true
-        bottomAnchor.constraint(equalTo: superView.bottomAnchor,  constant: CGFloat(-constant)).isActive = true
-    }
-    
-}
-
-
-extension String {
-    func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
-        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
-        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
-
-        return ceil(boundingBox.height)
-    }
-
-    func width(withConstrainedHeight height: CGFloat, font: UIFont) -> CGFloat {
-        let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
-        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
-
-        return ceil(boundingBox.width)
-    }
-}
-
-
-extension NSAttributedString {
-    func height(withConstrainedWidth width: CGFloat) -> CGFloat {
-        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
-        let boundingBox = boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, context: nil)
-
-        return ceil(boundingBox.height)
-    }
-
-    func width(withConstrainedHeight height: CGFloat) -> CGFloat {
-        let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
-        let boundingBox = boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, context: nil)
-
-        return ceil(boundingBox.width)
-    }
 }
