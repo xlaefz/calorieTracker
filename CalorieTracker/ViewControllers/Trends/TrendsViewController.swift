@@ -53,30 +53,30 @@ class TrendsViewController: UIViewController, ChartViewDelegate {
         var referenceTimeInterval: TimeInterval = 0
         let data = viewModel.getProcessed7DayData()
         if let minTimeInterval = (data.map { $0.date.timeIntervalSince1970 }).min() {
-                referenceTimeInterval = minTimeInterval
-            }
-
-
-            // Define chart xValues formatter
-            let formatter = DateFormatter()
-            formatter.dateStyle = .short
-            formatter.timeStyle = .none
-            formatter.locale = Locale.current
-
-            let xValuesNumberFormatter = ChartXAxisFormatter(referenceTimeInterval: referenceTimeInterval, dateFormatter: formatter)
-
+            referenceTimeInterval = minTimeInterval
+        }
+        
+        
+        // Define chart xValues formatter
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .none
+        formatter.locale = Locale.current
+        
+        let xValuesNumberFormatter = ChartXAxisFormatter(referenceTimeInterval: referenceTimeInterval, dateFormatter: formatter)
+        
         lineChartView.xAxis.valueFormatter = xValuesNumberFormatter
-
-            // Define chart entries
-            var entries = [ChartDataEntry]()
-            for object in data {
-                let timeInterval = object.date.timeIntervalSince1970
-                let xValue = (timeInterval - referenceTimeInterval) / (3600 * 24)
-
-                let yValue = object.calories
-                let entry = ChartDataEntry(x: xValue, y: Double(yValue))
-                entries.append(entry)
-            }
+        
+        // Define chart entries
+        var entries = [ChartDataEntry]()
+        for object in data {
+            let timeInterval = object.date.timeIntervalSince1970
+            let xValue = (timeInterval - referenceTimeInterval) / (3600 * 24)
+            
+            let yValue = object.calories
+            let entry = ChartDataEntry(x: xValue, y: Double(yValue))
+            entries.append(entry)
+        }
         let set1 = LineChartDataSet(entries: entries, label: "Running 7 Days Calories")
         set1.mode = .cubicBezier
         set1.circleRadius = 3
@@ -100,18 +100,18 @@ class TrendsViewController: UIViewController, ChartViewDelegate {
         ChartDataEntry(x: 1, y: 5),
         ChartDataEntry(x: 2, y: 7),
         ChartDataEntry(x: 3, y: 5),
-//        ChartDataEntry(x: 4, y: 10),
-//        ChartDataEntry(x: 5, y: 6),
-//        ChartDataEntry(x: 6, y: 5),
+        //        ChartDataEntry(x: 4, y: 10),
+        //        ChartDataEntry(x: 5, y: 6),
+        //        ChartDataEntry(x: 6, y: 5),
     ]
-
+    
 }
 
 
 class ChartXAxisFormatter: NSObject {
     fileprivate var dateFormatter: DateFormatter?
     fileprivate var referenceTimeInterval: TimeInterval?
-
+    
     convenience init(referenceTimeInterval: TimeInterval, dateFormatter: DateFormatter) {
         self.init()
         self.referenceTimeInterval = referenceTimeInterval
@@ -121,16 +121,16 @@ class ChartXAxisFormatter: NSObject {
 
 
 extension ChartXAxisFormatter: IAxisValueFormatter {
-
+    
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         guard let dateFormatter = dateFormatter,
-        let referenceTimeInterval = referenceTimeInterval
-        else {
-            return ""
+            let referenceTimeInterval = referenceTimeInterval
+            else {
+                return ""
         }
-
+        
         let date = Date(timeIntervalSince1970: value * 3600 * 24 + referenceTimeInterval)
         return dateFormatter.string(from: date)
     }
-
+    
 }

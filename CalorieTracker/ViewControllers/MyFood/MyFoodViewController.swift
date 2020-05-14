@@ -41,7 +41,8 @@ class TitleStackView: UIStackView {
         let buttonWidth: CGFloat = 50
         let button = UIButton(frame: CGRect(origin: .zero, size: CGSize(width: buttonWidth, height: buttonWidth)))
         button.setTitleColor(.systemBlue, for: .normal)
-        button.setTitle("Edit", for: .normal)
+        button.setTitle("🖊", for: .normal)
+//        button.setTitle("Edit", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
         button.heightAnchor.constraint(equalToConstant: buttonWidth).isActive = true
@@ -189,18 +190,20 @@ class MyFoodViewController: UIViewController {
 
 extension MyFoodViewController:UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.foods.count ?? 0
+        return viewModel.foods.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId) as! FoodCell
         let food = self.viewModel.foods[indexPath.row]
-        let caloriesString = String(food.calories)
-        cell.foodTitleLabel.text = "\(food.name ?? "")" + "  |  " + "\(caloriesString)"
-        if let data = food.image{
-            cell.foodImageView.image = UIImage(data: data)
-        }
-        cell.contentView.backgroundColor = UIColor.clear
+        cell.setUpCellWithFood(food)
+//        let caloriesString = String(food.calories)
+//        cell.foodTitleLabel.text = "\(food.name?.capitalized ?? "")"
+//        cell.calorieLabel.text = "\(caloriesString) cal"
+//        if let data = food.image{
+//            cell.foodImageView.image = UIImage(data: data)
+//        }
+//        cell.contentView.backgroundColor = UIColor.clear
         return cell
     }
     func numberOfSections(in tableView: UITableView) -> Int {

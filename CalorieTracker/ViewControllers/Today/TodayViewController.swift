@@ -176,11 +176,7 @@ extension TodayViewController:UITableViewDataSource{
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "FoodCell") as! FoodCell
         let food = self.viewModel.foodsEatenToday[indexPath.row-1]
-        let caloriesString = String(food.calories)
-        cell.foodTitleLabel.text = "\(food.name ?? "")" + "  |  " + "\(caloriesString)"
-        if let data = food.image{
-            cell.foodImageView.image = UIImage(data: data)
-        }
+        cell.setUpCellWithFood(food)
         return cell
     }
     
@@ -188,6 +184,9 @@ extension TodayViewController:UITableViewDataSource{
         return 1
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0{
+            return 200
+        }
         return 100
     }
     
