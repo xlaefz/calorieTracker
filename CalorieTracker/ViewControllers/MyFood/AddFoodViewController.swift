@@ -34,6 +34,11 @@ class AddFoodViewController: UIViewController {
         imageView.addGestureRecognizer(tapGestureRecognizer)
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle
+    {
+        return .lightContent
+    }
+    
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
         let imagePickerController = UIImagePickerController()

@@ -82,6 +82,11 @@ extension AddFoodTodayViewController:UITableViewDataSource{
             cell.layoutMargins = UIEdgeInsets.zero
         }
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle
+    {
+        return .lightContent
+    }
 }
 
 extension AddFoodTodayViewController:UITableViewDelegate{

@@ -52,7 +52,7 @@ class TodayViewController: UIViewController {
         let titleStackView = TitleStackView(frame: CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: 44.0)))
         titleStackView.button.isHidden = true
         titleStackView.titleLabel.text = "TODAY"
-        titleStackView.titleLabel.textColor = .black
+        titleStackView.titleLabel.textColor = .white
         titleStackView.translatesAutoresizingMaskIntoConstraints = false
         return titleStackView
     }()
@@ -86,12 +86,14 @@ class TodayViewController: UIViewController {
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
         tableView.tableHeaderView = tableHeaderView
-        tableView.tableHeaderView?.backgroundColor = .systemGray5
+        tableView.tableHeaderView?.backgroundColor = UIColor.backgroundColor
         viewModel.fetchData()
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.backgroundColor = UIColor.backgroundColor
+        navigationController?.navigationBar.barTintColor = UIColor.backgroundColor
+
         self.navigationController?.navigationBar.layoutIfNeeded()
         tableView.separatorColor = .clear
+        tableView.register(TodaySummaryCell.self, forCellReuseIdentifier: "SummaryCell")
 
         tableView.register(FoodCell.self, forCellReuseIdentifier: "FoodCell")
     }
@@ -133,7 +135,7 @@ class TodayViewController: UIViewController {
     func setupButton() {
         NSLayoutConstraint.activate([
             faButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -36),
-            faButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -70),
+            faButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -90),
             faButton.heightAnchor.constraint(equalToConstant: 50),
             faButton.widthAnchor.constraint(equalToConstant: 50)
         ])
@@ -169,9 +171,12 @@ extension TodayViewController:UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TodaySummaryCell") as! TodaySummaryCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SummaryCell") as! TodaySummaryCell
             let calories = viewModel.todayCalories()
-            cell.calories.text = String(calories)
+            cell.backgroundColor = UIColor.backgroundColor
+            cell.caloriesToday = calories
+            cell.percentageLabel.text = "   \(calories)"
+            cell.animate()
            return cell
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "FoodCell") as! FoodCell
@@ -185,9 +190,14 @@ extension TodayViewController:UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0{
-            return 200
+            return 400
         }
         return 100
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle
+    {
+        return .lightContent
     }
     
 }

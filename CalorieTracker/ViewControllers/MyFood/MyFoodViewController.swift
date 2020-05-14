@@ -41,8 +41,8 @@ class TitleStackView: UIStackView {
         let buttonWidth: CGFloat = 50
         let button = UIButton(frame: CGRect(origin: .zero, size: CGSize(width: buttonWidth, height: buttonWidth)))
         button.setTitleColor(.systemBlue, for: .normal)
-        button.setTitle("🖊", for: .normal)
-//        button.setTitle("Edit", for: .normal)
+//        button.setTitle("🖊", for: .normal)
+        button.setTitle("Edit", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
         button.heightAnchor.constraint(equalToConstant: buttonWidth).isActive = true
@@ -112,7 +112,10 @@ class MyFoodViewController: UIViewController {
             self.titleStackView.button.setTitle("Done", for: .normal)
         }
     }
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle
+    {
+        return .lightContent
+    }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
             viewModel.remove(index: indexPath.row)
@@ -177,7 +180,7 @@ class MyFoodViewController: UIViewController {
     func setupButton() {
         NSLayoutConstraint.activate([
             faButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -36),
-            faButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -70),
+            faButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -90),
             faButton.heightAnchor.constraint(equalToConstant: 50),
             faButton.widthAnchor.constraint(equalToConstant: 50)
         ])
@@ -244,4 +247,38 @@ extension UIView{
         bottomAnchor.constraint(equalTo: superView.bottomAnchor,  constant: CGFloat(-constant)).isActive = true
     }
     
+}
+
+
+extension String {
+    func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+
+        return ceil(boundingBox.height)
+    }
+
+    func width(withConstrainedHeight height: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+
+        return ceil(boundingBox.width)
+    }
+}
+
+
+extension NSAttributedString {
+    func height(withConstrainedWidth width: CGFloat) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, context: nil)
+
+        return ceil(boundingBox.height)
+    }
+
+    func width(withConstrainedHeight height: CGFloat) -> CGFloat {
+        let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
+        let boundingBox = boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, context: nil)
+
+        return ceil(boundingBox.width)
+    }
 }
