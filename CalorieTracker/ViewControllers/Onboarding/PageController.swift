@@ -18,7 +18,7 @@ class PageController: UICollectionViewController, UICollectionViewDelegateFlowLa
             layout.minimumLineSpacing = 0
         }
         collectionView?.isPagingEnabled = true
-        collectionView?.backgroundColor = .white
+        collectionView?.backgroundColor = UIColor.backgroundColor
         collectionView?.register(PageCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.allowsSelection = false
         setupPageControl()
@@ -28,7 +28,7 @@ class PageController: UICollectionViewController, UICollectionViewDelegateFlowLa
     fileprivate func setupPageControl() {
         pageControl.numberOfPages = pages.count
         pageControl.currentPage = 0
-        pageControl.currentPageIndicatorTintColor = .black
+        pageControl.currentPageIndicatorTintColor = .white
         pageControl.pageIndicatorTintColor = .lightGray
         view.addSubview(pageControl)
         pageControl.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .zero, size: .init(width: 0, height: 50))

@@ -145,7 +145,7 @@ class MyFoodViewController: UIViewController {
         page.actionHandler = {[weak self] item in
             guard let self = self else { return }
             guard let foodNameText = self.page.foodNameTextField.text, let _calories = self.page.caloriesTextField.text, !(self.page.foodNameTextField.text?.isEmpty ?? false), !(self.page.caloriesTextField.text?.isEmpty ?? false), let _image = self.page.pickedImage else { return }
-           guard let data = _image.pngData() else { return }
+            guard let data = _image.pngData() else { return }
             self.viewModel.editFood(food: food, name: foodNameText, calories: Int(_calories) ?? 0, data: data)
             self.bulletinManager.dismissBulletin()
             self.tableView.reloadData()
@@ -160,7 +160,7 @@ class MyFoodViewController: UIViewController {
         page.foodNameTextField.text = food.name
         page.caloriesTextField.text = String(food.calories)
         page.selectedImage.image = UIImage(data: food.image!)
-
+        
     }
     
     @objc func fabTapped(_ button: UIButton) {
@@ -172,7 +172,7 @@ class MyFoodViewController: UIViewController {
         page.actionHandler = {[weak self] item in
             guard let self = self else { return }
             guard let _food = self.page.foodNameTextField.text, let _calories = self.page.caloriesTextField.text, !(self.page.foodNameTextField.text?.isEmpty ?? false), !(self.page.caloriesTextField.text?.isEmpty ?? false), let _image = self.page.pickedImage else { return }
-           guard let data = _image.pngData() else { return }
+            guard let data = _image.pngData() else { return }
             self.viewModel.addFood(name: _food, calories: Int(_calories) ?? 0, data: data)
             self.bulletinManager.dismissBulletin()
             self.tableView.reloadData()
@@ -184,18 +184,18 @@ class MyFoodViewController: UIViewController {
         }
         bulletinManager = BLTNItemManager(rootItem: page)
         bulletinManager.showBulletin(above: self)
-
+        
         button.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-
+        
         UIView.animate(withDuration: 2.0,
-                                   delay: 0,
-                                   usingSpringWithDamping: CGFloat(0.20),
-                                   initialSpringVelocity: CGFloat(6.0),
-                                   options: UIView.AnimationOptions.allowUserInteraction,
-                                   animations: {
-                                    button.transform = CGAffineTransform.identity
-            },
-                                   completion: { Void in()  }
+                       delay: 0,
+                       usingSpringWithDamping: CGFloat(0.20),
+                       initialSpringVelocity: CGFloat(6.0),
+                       options: UIView.AnimationOptions.allowUserInteraction,
+                       animations: {
+                        button.transform = CGAffineTransform.identity
+        },
+                       completion: { Void in()  }
         )
         bulletinManager.popItem()
     }
@@ -216,6 +216,12 @@ class MyFoodViewController: UIViewController {
 
 extension MyFoodViewController:UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if viewModel.foods.count == 0 {
+            tableView.setEmptyView(title: "Add some foods to \nstart tracking!", message: "")
+        }
+        else {
+            tableView.restore()
+        }
         return viewModel.foods.count
     }
     

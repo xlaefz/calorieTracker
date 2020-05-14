@@ -32,6 +32,8 @@ class PageCell: UICollectionViewCell {
         stackView.addArrangedSubview(bodyLabel)
         stackView.axis = .vertical
         stackView.spacing = 0
+        bodyLabel.textColor = .white
+        titleLabel.textColor = .white
         
         addSubview(blackView)
         addSubview(stackView)
