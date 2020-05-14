@@ -91,7 +91,8 @@ class TodayViewController: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.layoutIfNeeded()
-        
+        tableView.separatorColor = .clear
+
         tableView.register(FoodCell.self, forCellReuseIdentifier: "FoodCell")
     }
     
@@ -187,9 +188,6 @@ extension TodayViewController:UITableViewDataSource{
         return 1
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            return 100
-        }
         return 100
     }
     

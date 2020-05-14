@@ -43,7 +43,6 @@ class FoodCell: UITableViewCell {
     }
         
     @objc private func handleMarkAsFavorite(){
-        print("Marking as favorite")
         link?.someMethodIWantToCall(cell: self)
     }
     

@@ -43,11 +43,13 @@ class TodayViewModel{
     }
     
     func addFood(food:Food){
+        foodsToAdd.insert(food)
         let _food = Food(context: PersistenceService.context)
         _food.name = food.name
         _food.image = food.image
         _food.calories = food.calories
         _food.setValue(Date(), forKey: "lastEaten")
+        foodsEatenToday.append(_food)
         PersistenceService.saveContext()
         foodsEatenToday.append(food)
     }
@@ -61,9 +63,10 @@ class TodayViewModel{
     }
     
     func remove(food:Food){
+        foodsToAdd.remove(food)
         let context = PersistenceService.context
         let index = foodsEatenToday.firstIndex(where: { (_food) -> Bool in
-             return _food.name == food.name && food.calories == _food.calories
+            return _food.name == food.name && food.calories == _food.calories
         })
         
         guard let _index = index else { return }

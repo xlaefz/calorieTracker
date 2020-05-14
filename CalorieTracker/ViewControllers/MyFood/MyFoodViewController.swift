@@ -76,7 +76,6 @@ class MyFoodViewController: UIViewController {
         tableView.separatorColor = .clear
         tableView.register(FoodCell.self, forCellReuseIdentifier: cellId)
         tableView.allowsSelection = false
-
     }
     
     override func viewDidAppear(_ animated: Bool) {

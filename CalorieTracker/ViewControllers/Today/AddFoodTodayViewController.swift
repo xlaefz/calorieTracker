@@ -23,6 +23,8 @@ class AddFoodTodayViewController: UIViewController {
         tableView.rowHeight = 100
         tableView.pin(to:view)
         tableView.register(FoodCell.self, forCellReuseIdentifier: "FoodCell")
+        tableView.separatorColor = .clear
+        tableView.backgroundColor = .systemGray5
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -35,11 +37,11 @@ class AddFoodTodayViewController: UIViewController {
         guard let food = viewModel?.foods[indexPathClickedOn.row] else { return }
         let hasFavorited = viewModel?.foodsToAdd.contains(food) ?? false
         if hasFavorited{
-            viewModel?.foodsToAdd.remove(food)
+//            viewModel?.foodsToAdd.remove(food)
             viewModel?.remove(food: food)
         }
         else{
-            viewModel?.foodsToAdd.insert(food)
+//            viewModel?.foodsToAdd.insert(food)
             viewModel?.addFood(food: food)
         }
         tableView.reloadRows(at: [indexPathClickedOn], with: .automatic)

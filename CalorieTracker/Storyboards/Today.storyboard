@@ -31,7 +31,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lci-yO-eia">
-                                                            <rect key="frame" x="0.0" y="6" width="195.5" height="82"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="195.5" height="82"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0XH-Bz-m6B">
                                                                     <rect key="frame" x="113" y="34" width="62.5" height="20.5"/>
@@ -65,7 +65,7 @@
                                                     <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstItem="Lci-yO-eia" firstAttribute="leading" secondItem="sWp-wo-AiK" secondAttribute="leading" id="gVp-eh-arW"/>
-                                                        <constraint firstAttribute="bottom" secondItem="Lci-yO-eia" secondAttribute="bottom" constant="12" id="mlX-qf-kq0"/>
+                                                        <constraint firstItem="Lci-yO-eia" firstAttribute="top" secondItem="sWp-wo-AiK" secondAttribute="top" id="hGx-Y6-nxD"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
