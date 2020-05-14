@@ -18,6 +18,7 @@ class AddFoodViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     var pickedImage:UIImage?
+    
     @IBAction func addFood(_ sender: Any) {
         guard let _food = foodNameTextField.text, let _calories = caloriesTextField.text, !(foodNameTextField.text?.isEmpty ?? false), !(caloriesTextField.text?.isEmpty ?? false), let _image = pickedImage else { return }
         guard let data = _image.pngData() else { return }
@@ -26,6 +27,7 @@ class AddFoodViewController: UIViewController {
     }
     
     var viewModel:MyFoodViewModel = MyFoodViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         cardView.layer.cornerRadius = 5
@@ -52,7 +54,6 @@ class AddFoodViewController: UIViewController {
             else{
                 print("Camera is not available")
             }
-            
         }))
         actionSheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { (action) in
             imagePickerController.sourceType = .photoLibrary

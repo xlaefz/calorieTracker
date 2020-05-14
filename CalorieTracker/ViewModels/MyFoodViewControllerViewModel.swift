@@ -26,6 +26,21 @@ class MyFoodViewModel{
         completion()
     }
     
+    func editFood(food:Food, name:String, calories:Int, data:Data){
+        let object = PersistenceService.context.object(with: food.objectID)
+        object.setValue(name, forKey: "name")
+        object.setValue(calories, forKey: "calories")
+        object.setValue(data, forKey: "image")
+        PersistenceService.saveContext()
+        
+        let foodRef = foods.first { (foodElem) -> Bool in
+            return foodElem == food
+        }
+        foodRef?.name = name
+        foodRef?.calories = Int16(calories)
+        foodRef?.image = data
+    }
+    
     func addFood(name:String, calories:Int, data:Data){
         let food = Food(context: PersistenceService.context)
         food.image = data

@@ -29,8 +29,6 @@ class MyFoodViewController: UIViewController {
         viewModel.fetchData {
             tableView.reloadData()
         }
-        
-        
     }
     
     func configureTableView(){
@@ -42,7 +40,6 @@ class MyFoodViewController: UIViewController {
         tableView.backgroundColor = .systemGray4
         tableView.separatorColor = .clear
         tableView.register(FoodCell.self, forCellReuseIdentifier: cellId)
-        tableView.allowsSelection = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -136,16 +133,50 @@ class MyFoodViewController: UIViewController {
         return button
     }()
     
-    @objc func fabTapped(_ button: UIButton) {
-        
-        page = TextFieldBulletinPage(title: "New Food")
-        page.descriptionText = "Define a new food to track."
-        page.actionButtonTitle = "Select Image"
-        page.actionHandler = { item in
-            print("Yeet")
+    func presentEditorWithFood(_ food:Food){
+        page = TextFieldBulletinPage(title: "Edit Food")
+        page.viewModel = self.viewModel
+        page.delegate = self
+        page.descriptionText = "Edit your current food"
+        page.actionButtonTitle = "Save"
+        page.foodNameTextField?.text = food.name
+        page.caloriesTextField?.text = String(food.calories)
+        page.pickedImage = UIImage(data: food.image!)
+        page.actionHandler = {[weak self] item in
+            guard let self = self else { return }
+            guard let foodNameText = self.page.foodNameTextField.text, let _calories = self.page.caloriesTextField.text, !(self.page.foodNameTextField.text?.isEmpty ?? false), !(self.page.caloriesTextField.text?.isEmpty ?? false), let _image = self.page.pickedImage else { return }
+           guard let data = _image.pngData() else { return }
+            self.viewModel.editFood(food: food, name: foodNameText, calories: Int(_calories) ?? 0, data: data)
+            self.bulletinManager.dismissBulletin()
+            self.tableView.reloadData()
         }
-        page.image = UIImage(named: "fav_star")
-        
+        page.alternativeButtonTitle = "Not now"
+        page.alternativeHandler = {
+            item in
+            self.bulletinManager.dismissBulletin()
+        }
+        bulletinManager = BLTNItemManager(rootItem: page)
+        bulletinManager.showBulletin(above: self)
+        page.foodNameTextField.text = food.name
+        page.caloriesTextField.text = String(food.calories)
+        page.selectedImage.image = UIImage(data: food.image!)
+
+    }
+    
+    @objc func fabTapped(_ button: UIButton) {
+        page = TextFieldBulletinPage(title: "New Food")
+        page.viewModel = self.viewModel
+        page.delegate = self
+        page.descriptionText = "Define a new food to track."
+        page.actionButtonTitle = "Save"
+        page.actionHandler = {[weak self] item in
+            guard let self = self else { return }
+            guard let _food = self.page.foodNameTextField.text, let _calories = self.page.caloriesTextField.text, !(self.page.foodNameTextField.text?.isEmpty ?? false), !(self.page.caloriesTextField.text?.isEmpty ?? false), let _image = self.page.pickedImage else { return }
+           guard let data = _image.pngData() else { return }
+            self.viewModel.addFood(name: _food, calories: Int(_calories) ?? 0, data: data)
+            self.bulletinManager.dismissBulletin()
+            self.tableView.reloadData()
+        }
         page.alternativeButtonTitle = "Not now"
         page.alternativeHandler = {
             item in
@@ -167,13 +198,6 @@ class MyFoodViewController: UIViewController {
                                    completion: { Void in()  }
         )
         bulletinManager.popItem()
-        
-        
-        
-//        let storyBoard = UIStoryboard(name: "MyFood", bundle: nil)
-//        let vc = storyBoard.instantiateViewController(identifier: "AddFood") as AddFoodViewController
-//        vc.viewModel = self.viewModel
-//        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func setupButton() {
@@ -199,17 +223,15 @@ extension MyFoodViewController:UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId) as! FoodCell
         let food = self.viewModel.foods[indexPath.row]
         cell.setUpCellWithFood(food)
-        //        let caloriesString = String(food.calories)
-        //        cell.foodTitleLabel.text = "\(food.name?.capitalized ?? "")"
-        //        cell.calorieLabel.text = "\(caloriesString) cal"
-        //        if let data = food.image{
-        //            cell.foodImageView.image = UIImage(data: data)
-        //        }
-        //        cell.contentView.backgroundColor = UIColor.clear
         return cell
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let food = viewModel.foods[indexPath.row]
+        presentEditorWithFood(food)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

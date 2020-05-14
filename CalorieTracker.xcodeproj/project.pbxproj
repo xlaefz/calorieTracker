@@ -38,6 +38,9 @@
 		88D42943246DBC2D007F6AF6 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D42942246DBC2D007F6AF6 /* UIViewExtensions.swift */; };
 		88D42946246DBC60007F6AF6 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D42945246DBC60007F6AF6 /* StringExtensions.swift */; };
 		88D42948246DBCFE007F6AF6 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D42947246DBCFE007F6AF6 /* UIColorExtensions.swift */; };
+		88D4294A246DF1F2007F6AF6 /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D42949246DF1F1007F6AF6 /* PageController.swift */; };
+		88D4294C246DF214007F6AF6 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D4294B246DF214007F6AF6 /* Page.swift */; };
+		88D4294E246DF217007F6AF6 /* PageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D4294D246DF217007F6AF6 /* PageCell.swift */; };
 		88FDA3B8246C55E8006D2EB1 /* TodaySummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FDA3B7246C55E8006D2EB1 /* TodaySummaryCell.swift */; };
 		88FDA3BD246C8320006D2EB1 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FDA3BC246C8320006D2EB1 /* HealthKit.framework */; };
 		88FDA3C1246C9B5C006D2EB1 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 88FDA3C0246C9B5B006D2EB1 /* Podfile */; };
@@ -104,6 +107,9 @@
 		88D42942246DBC2D007F6AF6 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		88D42945246DBC60007F6AF6 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		88D42947246DBCFE007F6AF6 /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		88D42949246DF1F1007F6AF6 /* PageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageController.swift; sourceTree = "<group>"; };
+		88D4294B246DF214007F6AF6 /* Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
+		88D4294D246DF217007F6AF6 /* PageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
 		88FDA3B7246C55E8006D2EB1 /* TodaySummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySummaryCell.swift; sourceTree = "<group>"; };
 		88FDA3BA246C8320006D2EB1 /* CalorieTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CalorieTracker.entitlements; sourceTree = "<group>"; };
 		88FDA3BC246C8320006D2EB1 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
@@ -193,6 +199,7 @@
 		8826C0F4246B1368005D4D08 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				88D4294F246DF368007F6AF6 /* Onboarding */,
 				88BE4798246B3FE500728B13 /* MyFood */,
 				88FDA3BF246C9A87006D2EB1 /* Trends */,
 				88C6F5C1246B88AD0098D66D /* Today */,
@@ -295,6 +302,16 @@
 				88D42947246DBCFE007F6AF6 /* UIColorExtensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		88D4294F246DF368007F6AF6 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				88D4294B246DF214007F6AF6 /* Page.swift */,
+				88D4294D246DF217007F6AF6 /* PageCell.swift */,
+				88D42949246DF1F1007F6AF6 /* PageController.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		88FDA3B9246C8288006D2EB1 /* ViewModels */ = {
@@ -577,11 +594,14 @@
 				88D4293E246D2DFF007F6AF6 /* FeedbackGenerators.swift in Sources */,
 				88D42946246DBC60007F6AF6 /* StringExtensions.swift in Sources */,
 				88C6F5C3246B88BF0098D66D /* TodayViewModel.swift in Sources */,
+				88D4294E246DF217007F6AF6 /* PageCell.swift in Sources */,
+				88D4294A246DF1F2007F6AF6 /* PageController.swift in Sources */,
 				881680B8246BCCB500C76A2E /* FoodCell.swift in Sources */,
 				8822BF8A246B425300B73961 /* MyFoodViewControllerViewModel.swift in Sources */,
 				8826C0F3246B1360005D4D08 /* TodayViewController.swift in Sources */,
 				88584594246B0C60008BF66A /* CalorieTracker.xcdatamodeld in Sources */,
 				8826C0F1246B1354005D4D08 /* TrendsViewController.swift in Sources */,
+				88D4294C246DF214007F6AF6 /* Page.swift in Sources */,
 				88FDA3B8246C55E8006D2EB1 /* TodaySummaryCell.swift in Sources */,
 				88D4293A246D2DB2007F6AF6 /* TextFieldBulletinPage.swift in Sources */,
 				88D42948246DBCFE007F6AF6 /* UIColorExtensions.swift in Sources */,
