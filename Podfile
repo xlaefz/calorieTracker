@@ -9,6 +9,7 @@ target 'CalorieTracker' do
     pod 'Charts'
     pod 'TinyConstraints'
     pod 'BulletinBoard'
+    pod 'NVActivityIndicatorView'
   target 'CalorieTrackerTests' do
     inherit! :search_paths
     # Pods for testing

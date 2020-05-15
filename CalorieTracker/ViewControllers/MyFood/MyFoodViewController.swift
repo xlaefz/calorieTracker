@@ -8,6 +8,7 @@
 
 import UIKit
 import BLTNBoard
+import NVActivityIndicatorView
 
 class MyFoodViewController: UIViewController {
     let cellId = "FoodCell"
@@ -29,6 +30,9 @@ class MyFoodViewController: UIViewController {
         viewModel.fetchData { [weak self] in
             self?.tableView.reloadData()
         }
+        let activityIndicatorView = NVActivityIndicatorView(frame: frame,
+                                               type: indicatorType)
+        self.view.addSubview(activityIndicatorView)
     }
     
     func configureTableView(){
@@ -52,7 +56,7 @@ class MyFoodViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tableView.reloadData()
+//        self.tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
