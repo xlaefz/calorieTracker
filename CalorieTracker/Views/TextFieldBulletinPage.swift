@@ -2,6 +2,13 @@
 import UIKit
 import BLTNBoard
 
+protocol BulletinManagerDelegate{
+    func dismissBulletin()
+    func showBulletin()
+    func resetBulletin(_ page:TextFieldBulletinPage)
+    func showPicker( picker: UIImagePickerController)
+}
+
 class TextFieldBulletinPage: FeedbackPageBLTNItem {
     
     @objc public var foodNameTextField: UITextField!
@@ -12,7 +19,7 @@ class TextFieldBulletinPage: FeedbackPageBLTNItem {
     @objc public var textInputHandler: ((BLTNActionItem, String?) -> Void)? = nil
     
     var pickedImage:UIImage?
-    weak var delegate:MyFoodViewController! //TODO: SHOULD USE DELEGATION
+    var delegate:BulletinManagerDelegate! //TODO: SHOULD USE DELEGATION
     var viewModel:MyFoodViewModel = MyFoodViewModel()
     var selectedImage:UIImageView!
     
@@ -59,7 +66,7 @@ class TextFieldBulletinPage: FeedbackPageBLTNItem {
             let imagePickerController = UIImagePickerController()
             
             imagePickerController.sourceType = .camera
-            self.delegate.present(imagePickerController, animated: true)
+            delegate.showPicker(picker: imagePickerController)
         }
         else{
             print("Camera is not available")
@@ -74,11 +81,12 @@ class TextFieldBulletinPage: FeedbackPageBLTNItem {
     
     @objc func usePhotoPicker(){
         saveText()
-        delegate.bulletinManager.dismissBulletin()
+        delegate.dismissBulletin()
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.sourceType = .photoLibrary
-        self.delegate.present(imagePickerController, animated: true)
+        delegate.showPicker(picker: imagePickerController)
+       
         
     }
     
@@ -134,9 +142,7 @@ extension TextFieldBulletinPage:UIImagePickerControllerDelegate, UINavigationCon
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         picker.dismiss(animated: true, completion: nil)
-        delegate.bulletinManager.showBulletin(above: delegate)
-        delegate.bulletinManager.popItem()
-        delegate.bulletinManager.push(item: self)
+        delegate.resetBulletin(self)
         selectedImage.image = image
         self.pickedImage = image
         self.foodNameTextField.text = prevNameText
@@ -145,7 +151,7 @@ extension TextFieldBulletinPage:UIImagePickerControllerDelegate, UINavigationCon
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
-        delegate.bulletinManager.showBulletin(above: delegate, animated: true, completion: nil)
+        delegate.showBulletin()
         
     }
 }

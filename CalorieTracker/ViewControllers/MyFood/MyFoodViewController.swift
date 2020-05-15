@@ -263,3 +263,23 @@ extension MyFoodViewController:UITableViewDataSource{
 
 extension MyFoodViewController:UITableViewDelegate{
 }
+
+extension MyFoodViewController:BulletinManagerDelegate{
+    func dismissBulletin() {
+        bulletinManager.dismissBulletin()
+    }
+    
+    func showBulletin() {
+        bulletinManager.showBulletin(above: self, animated: true, completion: nil)
+    }
+    
+    func resetBulletin(_ page:TextFieldBulletinPage) {
+        bulletinManager.showBulletin(above: self)
+        bulletinManager.popItem()
+        bulletinManager.push(item: page)
+    }
+    
+    func showPicker(picker: UIImagePickerController) {
+        self.present(picker, animated: true)
+    }
+}
