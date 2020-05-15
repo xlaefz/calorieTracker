@@ -178,6 +178,7 @@
 				88D42940246DBBFD007F6AF6 /* TitleStackView.swift */,
 				88D42939246D2DB2007F6AF6 /* TextFieldBulletinPage.swift */,
 				88D4293D246D2DFF007F6AF6 /* FeedbackGenerators.swift */,
+				884C8603246E052F00F86396 /* ChartTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -355,7 +356,6 @@
 			isa = PBXGroup;
 			children = (
 				8826C0F0246B1354005D4D08 /* TrendsViewController.swift */,
-				884C8603246E052F00F86396 /* ChartTableViewCell.swift */,
 			);
 			path = Trends;
 			sourceTree = "<group>";

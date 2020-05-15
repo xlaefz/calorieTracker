@@ -64,7 +64,6 @@ class TodaySummaryCell: UITableViewCell {
         shapeLayer.strokeEnd = 0
         shapeLayer.transform = CATransform3DMakeRotation(-CGFloat.pi/2, 0, 0, 1)
         
-        
         if !(self.contentView.layer.sublayers?.contains(shapeLayer) ?? false)
         {
             animatePulsatingLayer()
@@ -77,10 +76,6 @@ class TodaySummaryCell: UITableViewCell {
                 let indicatorType = NVActivityIndicatorType.ballRotate
                 let activityIndicatorView = NVActivityIndicatorView(frame: frame,
                                                        type: indicatorType)
-//                emptyView.addSubview(activityIndicatorView)
-//                activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
-//                activityIndicatorView.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor).isActive = true
-//                activityIndicatorView.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
                 activityIndicatorView.center = contentView.center
                 addSubview(activityIndicatorView)
 
@@ -91,7 +86,6 @@ class TodaySummaryCell: UITableViewCell {
                 percentageLabel.center = contentView.center
                 detailLabel.frame = CGRect(x: 0, y: 50, width: 300, height: 100)
                  detailLabel.center = CGPoint(x: 187.5+120, y: contentView.center.y+35)
-                 //            detailLabel.center = contentView.center
                  addSubview(percentageLabel)
                  addSubview(detailLabel)
                  
@@ -137,7 +131,6 @@ class TodaySummaryCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        //        animate()
         setupNotificationObservers()
     }
     
@@ -152,14 +145,4 @@ class TodaySummaryCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
-
-extension UIColor {
-    static func rgb(r:CGFloat, g:CGFloat, b:CGFloat)->UIColor{
-        return UIColor(red: r/255, green: g/255, blue: b/255, alpha: 1)
-    }
-    static let backgroundColor = UIColor.rgb(r: 21, g: 22, b: 33   )
-    static let outlineStrokeColor = UIColor.rgb(r: 234, g: 46, b: 111)
-    static let trackStrokeColor = UIColor.rgb(r: 56, g: 25, b: 49)
-    static let pulsatingFillColor = UIColor.rgb(r: 86, g: 30, b: 63)
 }

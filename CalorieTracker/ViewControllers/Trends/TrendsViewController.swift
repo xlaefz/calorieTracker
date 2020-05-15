@@ -25,6 +25,8 @@ class TrendsViewController: UIViewController, ChartViewDelegate {
         tableView.separatorColor = .clear
         tableView.tableHeaderView = tableHeaderView
         tableView.tableFooterView = UIView()
+        let insets = UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 0)
+        self.tableView.contentInset = insets
     }
     
     override func viewWillAppear(_ animated: Bool) {

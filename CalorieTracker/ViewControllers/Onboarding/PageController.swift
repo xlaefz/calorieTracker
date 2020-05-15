@@ -72,16 +72,4 @@ class PageController: UICollectionViewController, UICollectionViewDelegateFlowLa
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return view.bounds.size
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }

@@ -60,7 +60,6 @@ class TodayViewModel{
     
     
     func addFakeData(){
-        
         let food = foods[0]
         for i in 0..<30{
             let _food = Food(context: PersistenceService.context)
@@ -70,7 +69,6 @@ class TodayViewModel{
             let date = Calendar.current.date(byAdding: .day, value: -i, to: Date())
             _food.setValue(date, forKey: "lastEaten")
             PersistenceService.saveContext()
-            
         }
     }
     

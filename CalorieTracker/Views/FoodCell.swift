@@ -22,8 +22,6 @@ class FoodCell: UITableViewCell {
         cardView.clipsToBounds = true
         addSubview(cardView)
         cardView.pin(to: contentView, constant: 10)
-        
-        
         cardView.addSubview(foodImageView)
         cardView.addSubview(foodTitleLabel)
         cardView.addSubview(calorieLabel)
@@ -58,7 +56,6 @@ class FoodCell: UITableViewCell {
         starButton.addTarget(self, action: #selector(handleMarkAsFavorite), for: .touchUpInside)
     }
     
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -71,7 +68,6 @@ class FoodCell: UITableViewCell {
         foodTitleLabel.numberOfLines = 0
         foodTitleLabel.adjustsFontSizeToFitWidth = true
         foodTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        
         calorieLabel.numberOfLines = 0
         calorieLabel.adjustsFontSizeToFitWidth = true
         calorieLabel.font = UIFont.italicSystemFont(ofSize: 12)
@@ -91,14 +87,12 @@ class FoodCell: UITableViewCell {
         foodTitleLabel.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 5).isActive = true
         foodTitleLabel.leadingAnchor.constraint(equalTo: foodImageView.trailingAnchor, constant: 20).isActive = true
         foodTitleLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
-//        foodTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50).isActive = true
-        
+
         calorieLabel.translatesAutoresizingMaskIntoConstraints = false
         calorieLabel.topAnchor.constraint(equalTo: foodTitleLabel.bottomAnchor).isActive = true
         calorieLabel.leadingAnchor.constraint(equalTo: foodImageView.trailingAnchor, constant: 20).isActive = true
         calorieLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         calorieLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50).isActive = true
-        
     }
     
     func setUpCellWithFood(_ food:Food){
@@ -110,5 +104,4 @@ class FoodCell: UITableViewCell {
         }
         contentView.backgroundColor = UIColor.clear
     }
-    
 }

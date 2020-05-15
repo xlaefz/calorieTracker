@@ -10,55 +10,21 @@ import UIKit
 
 class TodayViewController: UIViewController {
     
-    lazy var titleStackView: TitleStackView = {
-        let titleStackView = TitleStackView(frame: CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: 44.0)))
-        titleStackView.button.isHidden = true
-        titleStackView.titleLabel.text = "TODAY"
-        titleStackView.titleLabel.textColor = .white
-        titleStackView.translatesAutoresizingMaskIntoConstraints = false
-        return titleStackView
-    }()
-    
-    lazy var tableHeaderView: UIView = {
-        let tableHeaderView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: 44.0)))
-        tableHeaderView.addSubview(titleStackView)
-        titleStackView.leadingAnchor.constraint(equalTo: tableHeaderView.leadingAnchor, constant: 16.0).isActive = true
-        titleStackView.topAnchor.constraint(equalTo: tableHeaderView.topAnchor).isActive = true
-        titleStackView.trailingAnchor.constraint(equalTo: tableHeaderView.trailingAnchor, constant: -16.0).isActive = true
-        titleStackView.bottomAnchor.constraint(equalTo: tableHeaderView.bottomAnchor).isActive = true
-        return tableHeaderView
-    }()
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let maxTitlePoint = tableView.convert(CGPoint(x: titleStackView.titleLabel.bounds.minX, y: titleStackView.titleLabel.bounds.maxY), from: titleStackView.titleLabel)
-        title = scrollView.contentOffset.y > maxTitlePoint.y ? "TODAY" : nil
-        if scrollView.contentOffset.y > maxTitlePoint.y{
-            self.navigationController?.navigationBar.layoutIfNeeded()
-        }
-        
-    }
-    
     @IBOutlet weak var tableView: UITableView!
     
     var viewModel = TodayViewModel()
     var isLoading = true
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.tableFooterView = UIView()
-        tableView.tableHeaderView = tableHeaderView
-        tableView.tableHeaderView?.backgroundColor = UIColor.backgroundColor
-        self.navigationController?.navigationBar.backgroundColor = UIColor.backgroundColor
-        navigationController?.navigationBar.barTintColor = UIColor.backgroundColor
-        self.navigationController?.navigationBar.isTranslucent = false
-        tableView.separatorColor = .clear
-        tableView.register(TodaySummaryCell.self, forCellReuseIdentifier: "SummaryCell")
-        tableView.register(FoodCell.self, forCellReuseIdentifier: "FoodCell")
+        setUpTableView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        showFAB()
+    }
+    
+    private func showFAB(){
         if let view = UIApplication.shared.keyWindow {
             view.addSubview(faButton)
             setupButton()
@@ -74,9 +40,27 @@ class TodayViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        hideFAB()
+    }
+    
+    private func hideFAB(){
         if let view = UIApplication.shared.keyWindow, faButton.isDescendant(of: view) {
             faButton.removeFromSuperview()
         }
+    }
+    
+    private func setUpTableView(){
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.tableFooterView = UIView()
+        tableView.tableHeaderView = tableHeaderView
+        tableView.tableHeaderView?.backgroundColor = UIColor.backgroundColor
+        self.navigationController?.navigationBar.backgroundColor = UIColor.backgroundColor
+        navigationController?.navigationBar.barTintColor = UIColor.backgroundColor
+        self.navigationController?.navigationBar.isTranslucent = false
+        tableView.separatorColor = .clear
+        tableView.register(TodaySummaryCell.self, forCellReuseIdentifier: "SummaryCell")
+        tableView.register(FoodCell.self, forCellReuseIdentifier: "FoodCell")
     }
     
     lazy var faButton: UIButton = {
@@ -111,6 +95,34 @@ class TodayViewController: UIViewController {
         faButton.layer.cornerRadius = 25
         faButton.layer.masksToBounds = true
         faButton.layer.borderWidth = 4
+    }
+    
+    lazy var titleStackView: TitleStackView = {
+        let titleStackView = TitleStackView(frame: CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: 44.0)))
+        titleStackView.button.isHidden = true
+        titleStackView.titleLabel.text = "TODAY"
+        titleStackView.titleLabel.textColor = .white
+        titleStackView.translatesAutoresizingMaskIntoConstraints = false
+        return titleStackView
+    }()
+    
+    lazy var tableHeaderView: UIView = {
+        let tableHeaderView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: 44.0)))
+        tableHeaderView.addSubview(titleStackView)
+        titleStackView.leadingAnchor.constraint(equalTo: tableHeaderView.leadingAnchor, constant: 16.0).isActive = true
+        titleStackView.topAnchor.constraint(equalTo: tableHeaderView.topAnchor).isActive = true
+        titleStackView.trailingAnchor.constraint(equalTo: tableHeaderView.trailingAnchor, constant: -16.0).isActive = true
+        titleStackView.bottomAnchor.constraint(equalTo: tableHeaderView.bottomAnchor).isActive = true
+        return tableHeaderView
+    }()
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let maxTitlePoint = tableView.convert(CGPoint(x: titleStackView.titleLabel.bounds.minX, y: titleStackView.titleLabel.bounds.maxY), from: titleStackView.titleLabel)
+        title = scrollView.contentOffset.y > maxTitlePoint.y ? "TODAY" : nil
+        if scrollView.contentOffset.y > maxTitlePoint.y{
+            self.navigationController?.navigationBar.layoutIfNeeded()
+        }
+        
     }
 }
 

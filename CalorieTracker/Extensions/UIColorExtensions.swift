@@ -12,7 +12,6 @@ import UIKit
 extension UIColor {
     public convenience init?(hex: String) {
         let r, g, b, a: CGFloat
-        
         if hex.hasPrefix("#") {
             let start = hex.index(hex.startIndex, offsetBy: 1)
             let hexColor = String(hex[start...])
@@ -37,12 +36,18 @@ extension UIColor {
     }
     
     convenience init(rgbColorCodeRed red: Int, green: Int, blue: Int, alpha: CGFloat) {
-        
         let redPart: CGFloat = CGFloat(red) / 255
         let greenPart: CGFloat = CGFloat(green) / 255
         let bluePart: CGFloat = CGFloat(blue) / 255
-        
         self.init(red: redPart, green: greenPart, blue: bluePart, alpha: alpha)
-        
     }
+    
+    static func rgb(r:CGFloat, g:CGFloat, b:CGFloat)->UIColor{
+         return UIColor(red: r/255, green: g/255, blue: b/255, alpha: 1)
+     }
+     static let backgroundColor = UIColor.rgb(r: 21, g: 22, b: 33   )
+     static let outlineStrokeColor = UIColor.rgb(r: 234, g: 46, b: 111)
+     static let trackStrokeColor = UIColor.rgb(r: 56, g: 25, b: 49)
+     static let pulsatingFillColor = UIColor.rgb(r: 86, g: 30, b: 63)
+    
 }

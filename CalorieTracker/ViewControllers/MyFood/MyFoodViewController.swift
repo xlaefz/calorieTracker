@@ -30,8 +30,6 @@ class MyFoodViewController: UIViewController {
             self?.isLoading = false
             self?.tableView.reloadData()
         }
-        
-        
     }
     
     func configureTableView(){
@@ -77,10 +75,12 @@ class MyFoodViewController: UIViewController {
             self.titleStackView.button.setTitle("Done", for: .normal)
         }
     }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle
     {
         return .lightContent
     }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
             viewModel.remove(index: indexPath.row)

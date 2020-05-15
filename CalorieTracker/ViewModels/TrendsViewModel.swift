@@ -14,6 +14,7 @@ class TrendsViewModel{
     var foodsEatenAllTime = [Food]()
     let todaysDate = Date()
     var data = [[ChartPoint]]()
+    
     func fetchData(completion:@escaping ()->()){
         DispatchQueue.background(background: { [weak self] in
             guard let self = self else { return }
@@ -72,7 +73,6 @@ class TrendsViewModel{
         return "Calories Over Time"
     }
     
-    
     private func processData(_ foods:[Food])->[ChartPoint]{
         var calendarMap = [Date:Int]()
         var sol = [ChartPoint]()
@@ -95,7 +95,6 @@ class TrendsViewModel{
     }
     
 }
-
 
 struct ChartPoint{
     var calories:Int

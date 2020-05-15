@@ -2,7 +2,6 @@
 import UIKit
 import BLTNBoard
 
-
 class TextFieldBulletinPage: FeedbackPageBLTNItem {
     
     @objc public var foodNameTextField: UITextField!
