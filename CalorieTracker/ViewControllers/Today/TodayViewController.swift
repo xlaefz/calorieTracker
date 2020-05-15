@@ -137,9 +137,9 @@ extension TodayViewController:UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if viewModel.foods.count == 0  && isLoading{
+        if viewModel.foodsEatenToday.count == 0  && isLoading{
             tableView.setLoadingView()
-        }else if viewModel.foods.count == 0  && !isLoading{
+        }else if viewModel.foodsEatenToday.count == 0  && !isLoading{
             tableView.setEmptyView(title: "Add what you've\neaten today")
         }
         else {

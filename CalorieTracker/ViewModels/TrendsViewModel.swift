@@ -70,7 +70,7 @@ class TrendsViewModel{
         if index == 0{
             return "Calories Past 7 Days"
         }
-        return "Calories Over Time"
+        return "Calories All Time"
     }
     
     private func processData(_ foods:[Food])->[ChartPoint]{

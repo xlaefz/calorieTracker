@@ -20,6 +20,7 @@
 		884C8602246E035E00F86396 /* ChartXAxisFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884C8601246E035E00F86396 /* ChartXAxisFormatter.swift */; };
 		884C8604246E052F00F86396 /* ChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884C8603246E052F00F86396 /* ChartTableViewCell.swift */; };
 		884C8606246E2FB300F86396 /* DispatchQueueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884C8605246E2FB200F86396 /* DispatchQueueExtensions.swift */; };
+		884C8608246E7E8100F86396 /* PillMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884C8607246E7E8000F86396 /* PillMarker.swift */; };
 		8858458A246B0C60008BF66A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88584589246B0C60008BF66A /* AppDelegate.swift */; };
 		8858458C246B0C60008BF66A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8858458B246B0C60008BF66A /* SceneDelegate.swift */; };
 		8858458E246B0C60008BF66A /* MyFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8858458D246B0C60008BF66A /* MyFoodViewController.swift */; };
@@ -86,6 +87,7 @@
 		884C8601246E035E00F86396 /* ChartXAxisFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartXAxisFormatter.swift; sourceTree = "<group>"; };
 		884C8603246E052F00F86396 /* ChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTableViewCell.swift; sourceTree = "<group>"; };
 		884C8605246E2FB200F86396 /* DispatchQueueExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueExtensions.swift; sourceTree = "<group>"; };
+		884C8607246E7E8000F86396 /* PillMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillMarker.swift; sourceTree = "<group>"; };
 		88584586246B0C60008BF66A /* CalorieTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalorieTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88584589246B0C60008BF66A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8858458B246B0C60008BF66A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			children = (
 				88D4294D246DF217007F6AF6 /* PageCell.swift */,
 				881680B7246BCCB500C76A2E /* FoodCell.swift */,
+				884C8607246E7E8000F86396 /* PillMarker.swift */,
 				88FDA3B7246C55E8006D2EB1 /* TodaySummaryCell.swift */,
 				88D4293B246D2DC7007F6AF6 /* FeedbackPageBulletinItem.swift */,
 				88D42940246DBBFD007F6AF6 /* TitleStackView.swift */,
@@ -621,6 +624,7 @@
 				8826C0F3246B1360005D4D08 /* TodayViewController.swift in Sources */,
 				88584594246B0C60008BF66A /* CalorieTracker.xcdatamodeld in Sources */,
 				8826C0F1246B1354005D4D08 /* TrendsViewController.swift in Sources */,
+				884C8608246E7E8100F86396 /* PillMarker.swift in Sources */,
 				88D4294C246DF214007F6AF6 /* Page.swift in Sources */,
 				88FDA3B8246C55E8006D2EB1 /* TodaySummaryCell.swift in Sources */,
 				88D4293A246D2DB2007F6AF6 /* TextFieldBulletinPage.swift in Sources */,

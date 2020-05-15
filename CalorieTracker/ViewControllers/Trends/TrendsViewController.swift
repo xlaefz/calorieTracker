@@ -71,6 +71,7 @@ extension TrendsViewController:UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view:UIView = {
             let view = UIView(frame: CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: self.view.frame.size.width, height: 50))
@@ -97,9 +98,11 @@ extension TrendsViewController:UITableViewDelegate, UITableViewDataSource{
         cell.setData(data: chartData)
         return cell
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return  400
     }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         if isLoading{
                           tableView.setLoadingView()
