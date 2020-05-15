@@ -4,7 +4,7 @@ import UIKit
 
 class PageCell: UICollectionViewCell {
     
-    var parentController: PageController?
+    weak var parentController: PageController?
     
     var page: Page! {
         didSet {
@@ -46,25 +46,7 @@ class PageCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
-        titleLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTitleTap)))
-        titleLabel.isUserInteractionEnabled = true
-        bodyLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleBodyTap)))
-        bodyLabel.isUserInteractionEnabled = true
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
-    }
-    
-    @objc func handleBodyTap() {
-        titleLabel.backgroundColor = .clear
-        titleLabel.textColor = .black
-        bodyLabel.backgroundColor = .black
-        bodyLabel.textColor = .white
-    }
-    
-    @objc func handleTitleTap(gesture: UITapGestureRecognizer) {
-        titleLabel.backgroundColor = .black
-        titleLabel.textColor = .white
-        bodyLabel.backgroundColor = .clear
-        bodyLabel.textColor = .black
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -123,9 +105,7 @@ class PageCell: UICollectionViewCell {
         bodyLabel.transform = .identity
         bodyLabel.alpha = 1
         titleLabel.backgroundColor = .clear
-        titleLabel.textColor = .black
         bodyLabel.backgroundColor = .clear
-        bodyLabel.textColor = .black
     }
 }
 

@@ -17,7 +17,7 @@ class MyFoodViewController: UIViewController {
     var isLoading = true
     
     lazy var bulletinManager: BLTNItemManager = {
-        let rootItem: BLTNItem = page // ... create your item here
+        let rootItem: BLTNItem = page
         return BLTNItemManager(rootItem: rootItem)
     }()
     
@@ -38,7 +38,7 @@ class MyFoodViewController: UIViewController {
         view.addSubview(tableView)
         tableView.rowHeight = 100
         tableView.pin(to:view)
-        tableView.backgroundColor = .systemGray4
+        tableView.backgroundColor = .systemGray5
         tableView.separatorColor = .clear
         tableView.register(FoodCell.self, forCellReuseIdentifier: cellId)
     }
@@ -121,6 +121,8 @@ class MyFoodViewController: UIViewController {
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = .systemGray5
         navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = false
+
         tableView.tableHeaderView = tableHeaderView
         tableView.tableFooterView = UIView()
     }
@@ -237,6 +239,7 @@ extension MyFoodViewController:UITableViewDataSource{
         cell.setUpCellWithFood(food)
         return cell
     }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

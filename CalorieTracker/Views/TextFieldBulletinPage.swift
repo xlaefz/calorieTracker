@@ -12,7 +12,7 @@ class TextFieldBulletinPage: FeedbackPageBLTNItem {
     @objc public var textInputHandler: ((BLTNActionItem, String?) -> Void)? = nil
     
     var pickedImage:UIImage?
-    weak var delegate:MyFoodViewController!
+    weak var delegate:MyFoodViewController! //TODO: SHOULD USE DELEGATION
     var viewModel:MyFoodViewModel = MyFoodViewModel()
     var selectedImage:UIImageView!
     
