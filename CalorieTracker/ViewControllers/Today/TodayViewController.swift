@@ -49,24 +49,26 @@ class TodayViewController: UIViewController {
         tableView.tableFooterView = UIView()
         tableView.tableHeaderView = tableHeaderView
         tableView.tableHeaderView?.backgroundColor = UIColor.backgroundColor
-        viewModel.fetchData()
         self.navigationController?.navigationBar.backgroundColor = UIColor.backgroundColor
         navigationController?.navigationBar.barTintColor = UIColor.backgroundColor
         
         self.navigationController?.navigationBar.layoutIfNeeded()
         tableView.separatorColor = .clear
         tableView.register(TodaySummaryCell.self, forCellReuseIdentifier: "SummaryCell")
-        
         tableView.register(FoodCell.self, forCellReuseIdentifier: "FoodCell")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if let view = UIApplication.shared.keyWindow {
-            viewModel.fetchData()
             view.addSubview(faButton)
             setupButton()
-            tableView.reloadData()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.fetchData { [weak self] in
+            self?.tableView.reloadData()
         }
     }
     
@@ -93,20 +95,9 @@ class TodayViewController: UIViewController {
             parent.selectedIndex = 0
             return
         }
-        UIView.animate(withDuration: 2.0,
-                       delay: 0,
-                       usingSpringWithDamping: CGFloat(0.20),
-                       initialSpringVelocity: CGFloat(6.0),
-                       options: UIView.AnimationOptions.allowUserInteraction,
-                       animations: {
-                        button.transform = CGAffineTransform.identity
-        },
-                       completion: { Void in()  }
-        )
         let storyBoard = UIStoryboard(name: "Today", bundle: nil)
         let vc = storyBoard.instantiateViewController(identifier: "AddFood") as AddFoodTodayViewController
         vc.viewModel = self.viewModel
-        
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -174,7 +165,7 @@ extension TodayViewController:UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0{
-            return 400
+            return self.view.frame.size.height * 0.4
         }
         return 100
     }

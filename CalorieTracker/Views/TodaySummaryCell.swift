@@ -101,7 +101,6 @@ class TodaySummaryCell: UITableViewCell {
         let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
         guard let _caloriesToday = caloriesToday else { return }
         basicAnimation.toValue = (Double(_caloriesToday)/Double(2000))
-        print((Double(_caloriesToday)/Double(2000)))
         basicAnimation.duration = 2
         basicAnimation.fillMode = .forwards
         basicAnimation.isRemovedOnCompletion = false

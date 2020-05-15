@@ -14,39 +14,51 @@ class TrendsViewModel{
     var foodsEatenAllTime = [Food]()
     let todaysDate = Date()
     
-    func fetchData(){
-        let fetchRequest:NSFetchRequest<Food> = Food.fetchRequest()
-        var calendar = Calendar.current
-        calendar.timeZone = NSTimeZone.local
-        // Get today's beginning & end
-        let dateFrom = calendar.startOfDay(for: Date())
-        let dateTo = calendar.date(byAdding: .day, value: 7, to: dateFrom)
-        let fromPredicate = NSPredicate(format: "lastEaten >= %@" , dateFrom as NSDate)
-        let toPredicate = NSPredicate(format: "lastEaten < %@", dateTo! as NSDate)
-        let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
-        fetchRequest.predicate = datePredicate
-        do{
-            let foods = try PersistenceService.context.fetch(fetchRequest)
+    func fetchData(completion:@escaping ()->()){
+        DispatchQueue.background(background: { [weak self] in
+            guard let self = self else { return }
+            let fetchRequest:NSFetchRequest<Food> = Food.fetchRequest()
+            var calendar = Calendar.current
+            calendar.timeZone = NSTimeZone.local
+            // Get today's beginning & end
+            let dateFrom = calendar.date(byAdding: .day, value: -7, to: Date())
+            let dateTo = Date()
+            let fromPredicate = NSPredicate(format: "lastEaten >= %@" , dateFrom! as NSDate)
+            let toPredicate = NSPredicate(format: "lastEaten <= %@", dateTo as NSDate)
+            let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
+            fetchRequest.predicate = datePredicate
+            do{
+                let foods = try PersistenceService.context.fetch(fetchRequest)
+                self.foodsEatenPast7Days = foods
+            } catch{
+            }
             
-            self.foodsEatenPast7Days = foods.sorted(by: { (fooda, foodb) -> Bool in
-                return fooda.lastEaten?.compare(foodb.lastEaten ?? Date()) == .orderedDescending
-            })
-        } catch{
-        }
-        
-        let foodsFetchRequest:NSFetchRequest<Food> = Food.fetchRequest()
-        let predicate = NSPredicate(format: "lastEaten != nil")
-        foodsFetchRequest.predicate = predicate
-        do{
-            let foods = try PersistenceService.context.fetch(foodsFetchRequest)
-            self.foodsEatenAllTime = foods
-            processData(foodsEatenAllTime)
-        } catch{
-        }
+            let foodsFetchRequest:NSFetchRequest<Food> = Food.fetchRequest()
+            let predicate = NSPredicate(format: "lastEaten != nil")
+            foodsFetchRequest.predicate = predicate
+            do{
+                let foods = try PersistenceService.context.fetch(foodsFetchRequest)
+                self.foodsEatenAllTime = foods.sorted(by: { (fooda, foodb) -> Bool in
+                    return fooda.lastEaten?.compare(foodb.lastEaten ?? Date()) == .orderedDescending
+                })
+            } catch{
+            }},completion:{
+                completion()
+        })
     }
     
-    func getProcessed7DayData()->[ChartPoint]{
-        return processData(foodsEatenPast7Days)
+    func getProcessedData(forSection index:Int)->[ChartPoint]{
+        if index == 0{
+            return processData(foodsEatenPast7Days)
+        }
+        return processData(foodsEatenAllTime)
+    }
+    
+    func getSectionTitle(forSection index:Int)->String{
+        if index == 0{
+            return "Calories Past 7 Days"
+        }
+        return "Calories Over Time"
     }
     
     
@@ -61,7 +73,9 @@ class TrendsViewModel{
         for (key,value) in calendarMap{
             sol.append(ChartPoint(calories: value, date: key))
         }
-        return sol
+        return sol.sorted { (a, b) -> Bool in
+            return a.date < b.date
+        }
     }
     
     

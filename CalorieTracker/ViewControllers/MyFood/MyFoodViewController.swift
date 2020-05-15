@@ -26,8 +26,8 @@ class MyFoodViewController: UIViewController {
         configureTableView()
         setupView()
         tableView.allowsSelectionDuringEditing = true
-        viewModel.fetchData {
-            tableView.reloadData()
+        viewModel.fetchData { [weak self] in
+            self?.tableView.reloadData()
         }
     }
     
@@ -173,9 +173,12 @@ class MyFoodViewController: UIViewController {
             guard let self = self else { return }
             guard let _food = self.page.foodNameTextField.text, let _calories = self.page.caloriesTextField.text, !(self.page.foodNameTextField.text?.isEmpty ?? false), !(self.page.caloriesTextField.text?.isEmpty ?? false), let _image = self.page.pickedImage else { return }
             guard let data = _image.pngData() else { return }
-            self.viewModel.addFood(name: _food, calories: Int(_calories) ?? 0, data: data)
-            self.bulletinManager.dismissBulletin()
-            self.tableView.reloadData()
+            self.viewModel.addFood(name: _food, calories: Int(_calories) ?? 0, data: data, completion:{ [weak self ] in
+                    self?.bulletinManager.dismissBulletin()
+                    self?.tableView.reloadData()
+                }
+            )
+            
         }
         page.alternativeButtonTitle = "Not now"
         page.alternativeHandler = {

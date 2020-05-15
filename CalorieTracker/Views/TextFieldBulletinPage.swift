@@ -48,8 +48,9 @@ class TextFieldBulletinPage: FeedbackPageBLTNItem {
         cameraButton.button.addTarget(self, action: #selector(usePhotoPicker), for: .touchUpInside)
         selectedImage = UIImageView(frame: CGRect(x: 100, y: 150, width: 75, height: 75)); // set as you want
         selectedImage.layer.cornerRadius = 8
-        let image = UIImage(named: "fav_star");
+        let image = UIImage(named: "icons8-kawaii-ice-cream");
         selectedImage.image = image
+        selectedImage.contentMode = .scaleAspectFit
         
         groupStack.addArrangedSubview(photosButton)
         groupStack.addArrangedSubview(cameraButton)

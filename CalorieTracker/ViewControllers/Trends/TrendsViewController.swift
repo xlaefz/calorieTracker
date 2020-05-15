@@ -11,98 +11,67 @@ import Charts
 import TinyConstraints
 
 class TrendsViewController: UIViewController, ChartViewDelegate {
-    
-    lazy var lineChartView:LineChartView = {
-        let chartView = LineChartView()
-        chartView.backgroundColor = .white
-        chartView.rightAxis.enabled = false
-        let yAxis = chartView.leftAxis
-        yAxis.labelFont = .boldSystemFont(ofSize: 12)
-        yAxis.setLabelCount(6, force: false)
-        yAxis.labelTextColor = .white //.systemGray3
-        yAxis.axisLineColor = .white
-        yAxis.labelPosition = .outsideChart
-        yAxis.drawGridLinesEnabled = false
-        chartView.xAxis.labelPosition = .bottom
-        chartView.xAxis.labelFont = .boldSystemFont(ofSize: 12)
-        chartView.xAxis.setLabelCount(1, force: false)
-        chartView.xAxis.labelTextColor = .white //.systemGray3
-        chartView.xAxis.axisLineColor = .white
-        chartView.xAxis.drawGridLinesEnabled = false
-        chartView.xAxis.labelRotationAngle = -45
-        chartView.animate(xAxisDuration: 0.5)
-        chartView.backgroundColor = UIColor.backgroundColor
-        
-        return chartView
-    }()
+    @IBOutlet weak var tableView: UITableView!
     let viewModel = TrendsViewModel()
-    
+    let cellId = "charts"
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.fetchData()
-        view.addSubview(lineChartView)
-        lineChartView.centerInSuperview()
-        lineChartView.width(to: view)
-        lineChartView.heightToWidth(of: view)
-        setData()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(ChartTableViewCell.self, forCellReuseIdentifier: cellId)
+        self.tableView.backgroundColor = .systemGray5
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.fetchData()
+        viewModel.fetchData { [weak self] in
+            self?.tableView.reloadData()
+        }
     }
     
-    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-    }
     override var preferredStatusBarStyle: UIStatusBarStyle
     {
         return .lightContent
     }
-    
-    func setData(){
-        
-        var referenceTimeInterval: TimeInterval = 0
-        let data = viewModel.getProcessed7DayData()
-        if let minTimeInterval = (data.map { $0.date.timeIntervalSince1970 }).min() {
-            referenceTimeInterval = minTimeInterval
-        }
-        // Define chart xValues formatter
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .none
-        formatter.locale = Locale.current
-        
-        let xValuesNumberFormatter = ChartXAxisFormatter(referenceTimeInterval: referenceTimeInterval, dateFormatter: formatter)
-        
-        lineChartView.xAxis.valueFormatter = xValuesNumberFormatter
-        
-        // Define chart entries
-        var entries = [ChartDataEntry]()
-        for object in data {
-            let timeInterval = object.date.timeIntervalSince1970
-            let xValue = (timeInterval - referenceTimeInterval) / (3600 * 24)
-            
-            let yValue = object.calories
-            let entry = ChartDataEntry(x: xValue, y: Double(yValue))
-            entries.append(entry)
-        }
-        let set1 = LineChartDataSet(entries: entries, label: "")
-        set1.mode = .cubicBezier
-        set1.circleRadius = 3
-        set1.setCircleColor(UIColor(rgbColorCodeRed: 233, green: 116, blue: 124, alpha: 1))
-        set1.lineWidth = 3
-        set1.setColor(.white)
-        set1.fill = Fill(color: UIColor(rgbColorCodeRed: 233, green: 116, blue: 124, alpha: 1))
-        set1.fillAlpha = 0.7
-        set1.drawFilledEnabled = true
-        
-        set1.drawHorizontalHighlightIndicatorEnabled = false
-        set1.highlightColor = .systemRed
-        
-        let data2 = LineChartData(dataSet: set1)
-        data2.setDrawValues(false)
-        lineChartView.data = data2
+}
+
+extension TrendsViewController:UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view:UIView = {
+            let view = UIView(frame: CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: self.view.frame.size.width, height: 50))
+            view.backgroundColor = .systemGray5
+            let label = UILabel(frame: CGRect(x: 15, y: 15, width: 400, height: 30))
+            label.textColor = UIColor.black
+            label.font = UIFont(name: "HelveticaNeue-Bold", size: 35)
+            label.textAlignment = .left
+            label.text = viewModel.getSectionTitle(forSection: section)
+            view.addSubview(label)
+            return view
+        }()
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId) as! ChartTableViewCell
+        let section = indexPath.section
+        let chartData = viewModel.getProcessedData(forSection: section)
+        cell.setData(data: chartData)
+        return cell
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return  400
+    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     
 }
 

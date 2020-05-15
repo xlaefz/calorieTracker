@@ -19,6 +19,7 @@
 		884C85FF246DFCCC00F86396 /* TableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884C85FE246DFCCC00F86396 /* TableViewExtensions.swift */; };
 		884C8602246E035E00F86396 /* ChartXAxisFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884C8601246E035E00F86396 /* ChartXAxisFormatter.swift */; };
 		884C8604246E052F00F86396 /* ChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884C8603246E052F00F86396 /* ChartTableViewCell.swift */; };
+		884C8606246E2FB300F86396 /* DispatchQueueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884C8605246E2FB200F86396 /* DispatchQueueExtensions.swift */; };
 		8858458A246B0C60008BF66A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88584589246B0C60008BF66A /* AppDelegate.swift */; };
 		8858458C246B0C60008BF66A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8858458B246B0C60008BF66A /* SceneDelegate.swift */; };
 		8858458E246B0C60008BF66A /* MyFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8858458D246B0C60008BF66A /* MyFoodViewController.swift */; };
@@ -32,7 +33,6 @@
 		885845BF246B0D90008BF66A /* Today.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 885845BE246B0D90008BF66A /* Today.storyboard */; };
 		885845C1246B0DD6008BF66A /* Trends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 885845C0246B0DD6008BF66A /* Trends.storyboard */; };
 		889C2557246CC4D000C51257 /* TrendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889C2556246CC4D000C51257 /* TrendsViewModel.swift */; };
-		88BE4797246B3FDD00728B13 /* AddFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BE4796246B3FDD00728B13 /* AddFoodViewController.swift */; };
 		88C6F5C3246B88BF0098D66D /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C6F5C2246B88BF0098D66D /* TodayViewModel.swift */; };
 		88D4293A246D2DB2007F6AF6 /* TextFieldBulletinPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D42939246D2DB2007F6AF6 /* TextFieldBulletinPage.swift */; };
 		88D4293C246D2DC7007F6AF6 /* FeedbackPageBulletinItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D4293B246D2DC7007F6AF6 /* FeedbackPageBulletinItem.swift */; };
@@ -85,6 +85,7 @@
 		884C85FE246DFCCC00F86396 /* TableViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewExtensions.swift; sourceTree = "<group>"; };
 		884C8601246E035E00F86396 /* ChartXAxisFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartXAxisFormatter.swift; sourceTree = "<group>"; };
 		884C8603246E052F00F86396 /* ChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTableViewCell.swift; sourceTree = "<group>"; };
+		884C8605246E2FB200F86396 /* DispatchQueueExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueExtensions.swift; sourceTree = "<group>"; };
 		88584586246B0C60008BF66A /* CalorieTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalorieTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88584589246B0C60008BF66A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8858458B246B0C60008BF66A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,7 +105,6 @@
 		885845BE246B0D90008BF66A /* Today.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Today.storyboard; sourceTree = "<group>"; };
 		885845C0246B0DD6008BF66A /* Trends.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Trends.storyboard; sourceTree = "<group>"; };
 		889C2556246CC4D000C51257 /* TrendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendsViewModel.swift; sourceTree = "<group>"; };
-		88BE4796246B3FDD00728B13 /* AddFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodViewController.swift; sourceTree = "<group>"; };
 		88C6F5C2246B88BF0098D66D /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
 		88D42939246D2DB2007F6AF6 /* TextFieldBulletinPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldBulletinPage.swift; sourceTree = "<group>"; };
 		88D4293B246D2DC7007F6AF6 /* FeedbackPageBulletinItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackPageBulletinItem.swift; sourceTree = "<group>"; };
@@ -288,7 +288,6 @@
 		88BE4798246B3FE500728B13 /* MyFood */ = {
 			isa = PBXGroup;
 			children = (
-				88BE4796246B3FDD00728B13 /* AddFoodViewController.swift */,
 				8858458D246B0C60008BF66A /* MyFoodViewController.swift */,
 			);
 			path = MyFood;
@@ -317,6 +316,7 @@
 				88D42942246DBC2D007F6AF6 /* UIViewExtensions.swift */,
 				884C85FE246DFCCC00F86396 /* TableViewExtensions.swift */,
 				88D42945246DBC60007F6AF6 /* StringExtensions.swift */,
+				884C8605246E2FB200F86396 /* DispatchQueueExtensions.swift */,
 				88D42947246DBCFE007F6AF6 /* UIColorExtensions.swift */,
 			);
 			path = Extensions;
@@ -624,8 +624,8 @@
 				88D4294C246DF214007F6AF6 /* Page.swift in Sources */,
 				88FDA3B8246C55E8006D2EB1 /* TodaySummaryCell.swift in Sources */,
 				88D4293A246D2DB2007F6AF6 /* TextFieldBulletinPage.swift in Sources */,
+				884C8606246E2FB300F86396 /* DispatchQueueExtensions.swift in Sources */,
 				88D42948246DBCFE007F6AF6 /* UIColorExtensions.swift in Sources */,
-				88BE4797246B3FDD00728B13 /* AddFoodViewController.swift in Sources */,
 				8858458C246B0C60008BF66A /* SceneDelegate.swift in Sources */,
 				889C2557246CC4D000C51257 /* TrendsViewModel.swift in Sources */,
 				8822BF8C246B725A00B73961 /* PersistanceService.swift in Sources */,
