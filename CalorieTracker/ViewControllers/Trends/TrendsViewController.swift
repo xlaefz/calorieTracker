@@ -18,6 +18,12 @@ class TrendsViewController: UIViewController, ChartViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableView()
+    }
+    
+    
+    func setupTableView(){
+        title = nil
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ChartTableViewCell.self, forCellReuseIdentifier: cellId)
@@ -27,6 +33,9 @@ class TrendsViewController: UIViewController, ChartViewDelegate {
         tableView.tableFooterView = UIView()
         let insets = UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 0)
         self.tableView.contentInset = insets
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = .systemGray5
+        navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     override func viewWillAppear(_ animated: Bool) {

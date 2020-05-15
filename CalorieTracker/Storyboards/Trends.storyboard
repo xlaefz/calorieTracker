@@ -16,16 +16,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MX8-B8-sEr">
-                                <rect key="frame" x="0.0" y="140" width="414" height="673"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="MX8-B8-sEr" firstAttribute="leading" secondItem="Au1-PN-kup" secondAttribute="leading" id="7WP-m8-g0Y"/>
-                            <constraint firstItem="Au1-PN-kup" firstAttribute="bottom" secondItem="MX8-B8-sEr" secondAttribute="bottom" id="Zz4-Hj-dTp"/>
-                            <constraint firstItem="Au1-PN-kup" firstAttribute="trailing" secondItem="MX8-B8-sEr" secondAttribute="trailing" id="e27-bV-TRy"/>
-                            <constraint firstItem="MX8-B8-sEr" firstAttribute="top" secondItem="Au1-PN-kup" secondAttribute="top" id="oHG-no-8rQ"/>
+                            <constraint firstItem="MX8-B8-sEr" firstAttribute="bottom" secondItem="Au1-PN-kup" secondAttribute="bottom" id="B10-OB-I4O"/>
+                            <constraint firstItem="MX8-B8-sEr" firstAttribute="top" secondItem="Au1-PN-kup" secondAttribute="top" id="G54-5s-5V6"/>
+                            <constraint firstItem="MX8-B8-sEr" firstAttribute="trailing" secondItem="Au1-PN-kup" secondAttribute="trailing" id="GmD-Qi-8mu"/>
+                            <constraint firstItem="MX8-B8-sEr" firstAttribute="leading" secondItem="Au1-PN-kup" secondAttribute="leading" id="qLB-Aa-GP4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Au1-PN-kup"/>
                     </view>
@@ -45,9 +45,12 @@
                     <tabBarItem key="tabBarItem" title="Trends" image="icons8-line-chart" id="Frz-4L-I2U"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Mhn-Mc-38g">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Mhn-Mc-38g">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
