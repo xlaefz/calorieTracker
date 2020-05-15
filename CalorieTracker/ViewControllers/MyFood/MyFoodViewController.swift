@@ -199,7 +199,7 @@ class MyFoodViewController: UIViewController {
                        options: UIView.AnimationOptions.allowUserInteraction,
                        animations: {
                         button.transform = CGAffineTransform.identity
-        },
+                        },
                        completion: { Void in()  }
         )
         bulletinManager.popItem()
@@ -216,7 +216,6 @@ class MyFoodViewController: UIViewController {
         faButton.layer.masksToBounds = true
         faButton.layer.borderWidth = 4
     }
-    
 }
 
 extension MyFoodViewController:UITableViewDataSource{

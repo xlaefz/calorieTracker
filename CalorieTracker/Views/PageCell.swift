@@ -127,18 +127,5 @@ class PageCell: UICollectionViewCell {
         bodyLabel.backgroundColor = .clear
         bodyLabel.textColor = .black
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
 }
 

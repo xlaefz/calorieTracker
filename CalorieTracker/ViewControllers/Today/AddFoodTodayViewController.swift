@@ -45,7 +45,6 @@ class AddFoodTodayViewController: UIViewController {
         }
         tableView.reloadRows(at: [indexPathClickedOn], with: .automatic)
     }
-    
 }
 
 extension AddFoodTodayViewController:UITableViewDataSource{

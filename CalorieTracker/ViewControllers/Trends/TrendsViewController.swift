@@ -112,7 +112,5 @@ extension TrendsViewController:UITableViewDelegate, UITableViewDataSource{
         }
         return viewModel.data.count
     }
-    
-    
 }
 

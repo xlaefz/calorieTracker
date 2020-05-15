@@ -42,7 +42,6 @@ class ChartTableViewCell: UITableViewCell {
         chartView.xAxis.drawGridLinesEnabled = false
         chartView.xAxis.labelRotationAngle = -45
         chartView.animate(xAxisDuration: 0.5)
-        
         return chartView
     }()
     
