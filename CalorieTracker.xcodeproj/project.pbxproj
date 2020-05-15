@@ -219,12 +219,12 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		884C8600246E034D00F86396 /* Utility */ = {
+		884C8600246E034D00F86396 /* ChartsUtility */ = {
 			isa = PBXGroup;
 			children = (
 				884C8601246E035E00F86396 /* ChartXAxisFormatter.swift */,
 			);
-			path = Utility;
+			path = ChartsUtility;
 			sourceTree = "<group>";
 		};
 		8858457D246B0C60008BF66A = {
@@ -255,7 +255,7 @@
 				88FDA3BA246C8320006D2EB1 /* CalorieTracker.entitlements */,
 				88584589246B0C60008BF66A /* AppDelegate.swift */,
 				8858458B246B0C60008BF66A /* SceneDelegate.swift */,
-				884C8600246E034D00F86396 /* Utility */,
+				884C8600246E034D00F86396 /* ChartsUtility */,
 				88D42944246DBC3B007F6AF6 /* Extensions */,
 				88D4293F246DBBBB007F6AF6 /* Persistence Service */,
 				88FDA3B9246C8288006D2EB1 /* ViewModels */,

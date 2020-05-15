@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Charts
 
+///Marker on Chart
 class PillMarker: MarkerImage {
 
     private (set) var color: UIColor

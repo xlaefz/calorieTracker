@@ -34,7 +34,7 @@ class PageController: UICollectionViewController, UICollectionViewDelegateFlowLa
         pageControl.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .zero, size: .init(width: 0, height: 50))
     }
     
-    func scrollToNext() {
+    private func scrollToNext() {
         guard let currentCell = collectionView?.visibleCells.first else { return }
         guard let index = collectionView?.indexPath(for: currentCell)?.item else { return }
         

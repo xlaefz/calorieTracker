@@ -32,7 +32,7 @@ class MyFoodViewController: UIViewController {
         }
     }
     
-    func configureTableView(){
+    private func configureTableView(){
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
@@ -92,7 +92,7 @@ class MyFoodViewController: UIViewController {
         }
     }
     
-    lazy var titleStackView: TitleStackView = {
+    private lazy var titleStackView: TitleStackView = {
         let titleStackView = TitleStackView(frame: CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: 44.0)))
         titleStackView.button.addTarget(self, action: #selector(self.editSelector(_:)), for: .touchUpInside)
         titleStackView.titleLabel.text = "My Food"
@@ -100,7 +100,7 @@ class MyFoodViewController: UIViewController {
         return titleStackView
     }()
     
-    lazy var tableHeaderView: UIView = {
+    private lazy var tableHeaderView: UIView = {
         let tableHeaderView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: 44.0)))
         tableHeaderView.addSubview(titleStackView)
         titleStackView.leadingAnchor.constraint(equalTo: tableHeaderView.leadingAnchor, constant: 16.0).isActive = true
@@ -110,24 +110,18 @@ class MyFoodViewController: UIViewController {
         return tableHeaderView
     }()
     
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let maxTitlePoint = tableView.convert(CGPoint(x: titleStackView.titleLabel.bounds.minX, y: titleStackView.titleLabel.bounds.maxY), from: titleStackView.titleLabel)
-        title = scrollView.contentOffset.y > maxTitlePoint.y ? "My Foods" : nil
-    }
-    
     private func setupView(){
         title = nil
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = .systemGray5
         navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = false
-
+        
         tableView.tableHeaderView = tableHeaderView
         tableView.tableFooterView = UIView()
     }
     
-    lazy var faButton: UIButton = {
+    private lazy var faButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .black
@@ -137,7 +131,7 @@ class MyFoodViewController: UIViewController {
         return button
     }()
     
-    func presentEditorWithFood(_ food:Food){
+    private func presentEditorWithFood(_ food:Food){
         page = TextFieldBulletinPage(title: "Edit Food")
         page.viewModel = self.viewModel
         page.delegate = self
@@ -200,13 +194,13 @@ class MyFoodViewController: UIViewController {
                        options: UIView.AnimationOptions.allowUserInteraction,
                        animations: {
                         button.transform = CGAffineTransform.identity
-                        },
+        },
                        completion: { Void in()  }
         )
         bulletinManager.popItem()
     }
     
-    func setupButton() {
+    private func setupButton() {
         NSLayoutConstraint.activate([
             faButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -36),
             faButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -90),
@@ -262,6 +256,10 @@ extension MyFoodViewController:UITableViewDataSource{
 }
 
 extension MyFoodViewController:UITableViewDelegate{
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let maxTitlePoint = tableView.convert(CGPoint(x: titleStackView.titleLabel.bounds.minX, y: titleStackView.titleLabel.bounds.maxY), from: titleStackView.titleLabel)
+        title = scrollView.contentOffset.y > maxTitlePoint.y ? "My Foods" : nil
+    }
 }
 
 extension MyFoodViewController:BulletinManagerDelegate{

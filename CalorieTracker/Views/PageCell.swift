@@ -1,7 +1,7 @@
 
 
 import UIKit
-
+/// Onboarding Screen Cells UI
 class PageCell: UICollectionViewCell {
     
     weak var parentController: PageController?

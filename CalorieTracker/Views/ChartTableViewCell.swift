@@ -9,6 +9,7 @@
 import UIKit
 import Charts
 
+/// Custom chart tableview cells, instantiated with data [ChartPoint]
 class ChartTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {

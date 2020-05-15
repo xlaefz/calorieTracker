@@ -1,7 +1,7 @@
 
 import UIKit
 
-
+///Generates Notifications for custom alert view
 class SelectionFeedbackGenerator {
 
     private let anyObject: AnyObject?

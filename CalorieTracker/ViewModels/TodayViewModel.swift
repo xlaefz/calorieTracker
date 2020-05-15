@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+/// Manages TodayViewController/AddFoodViewController Data
 class TodayViewModel{
     var foodsEatenToday = [Food]()
     var foods = [Food]()

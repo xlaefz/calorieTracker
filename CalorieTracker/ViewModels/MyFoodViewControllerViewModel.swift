@@ -10,7 +10,7 @@ import Foundation
 
 
 import CoreData
-
+///Manages data for MyFoodViewController
 class MyFoodViewModel{
     var foods:[Food] = [Food]()
     

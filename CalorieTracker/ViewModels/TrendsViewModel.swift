@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+///Manages TrendsViewController Data
 class TrendsViewModel{
     var foodsEatenPast7Days = [Food]()
     var foodsEatenAllTime = [Food]()

@@ -9,6 +9,7 @@
 import UIKit
 import NVActivityIndicatorView
 
+/// Today's Food Eaten Cell. Manages animation
 class TodaySummaryCell: UITableViewCell {
     var caloriesToday:Int?
     let shapeLayer = CAShapeLayer()

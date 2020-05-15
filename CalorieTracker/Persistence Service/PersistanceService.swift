@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+///Manages Connection to CoreData
 class PersistenceService{
     private init(){
 

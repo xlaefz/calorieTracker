@@ -1,7 +1,7 @@
 import UIKit
 import BLTNBoard
 
-
+///Corewrapper to handle feedback inputs on buttom in custom alert views
 class FeedbackPageBLTNItem: BLTNPageItem {
 
     private let feedbackGenerator = SelectionFeedbackGenerator()

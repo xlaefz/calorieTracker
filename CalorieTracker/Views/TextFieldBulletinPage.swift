@@ -9,6 +9,7 @@ protocol BulletinManagerDelegate{
     func showPicker( picker: UIImagePickerController)
 }
 
+///Custom alertview for handling adding food to database
 class TextFieldBulletinPage: FeedbackPageBLTNItem {
     
     @objc public var foodNameTextField: UITextField!

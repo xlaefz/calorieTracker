@@ -8,6 +8,7 @@
 
 import UIKit
 
+///FoodCell To Show Food Name, Calories, and Image
 class FoodCell: UITableViewCell {
     var foodImageView = UIImageView()
     var foodTitleLabel = UILabel()

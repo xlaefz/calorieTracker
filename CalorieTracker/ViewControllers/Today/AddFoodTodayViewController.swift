@@ -15,13 +15,14 @@ protocol AddFoodDelegate {
 class AddFoodTodayViewController: UIViewController {
     let tableView = UITableView()
     var viewModel:TodayViewModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.tintColor = UIColor.white
         configureTableView()
     }
     
-    func configureTableView(){
+    private func configureTableView(){
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)

@@ -22,7 +22,7 @@ class TrendsViewController: UIViewController, ChartViewDelegate {
     }
     
     
-    func setupTableView(){
+    private func setupTableView(){
         title = nil
         tableView.delegate = self
         tableView.dataSource = self
@@ -51,7 +51,7 @@ class TrendsViewController: UIViewController, ChartViewDelegate {
         return .lightContent
     }
     
-    lazy var titleStackView: TitleStackView = {
+    private lazy var titleStackView: TitleStackView = {
         let titleStackView = TitleStackView(frame: CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: 44.0)))
         titleStackView.titleLabel.text = "Trends"
         titleStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -59,7 +59,7 @@ class TrendsViewController: UIViewController, ChartViewDelegate {
         return titleStackView
     }()
     
-    lazy var tableHeaderView: UIView = {
+    private lazy var tableHeaderView: UIView = {
         let tableHeaderView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: 44.0)))
         tableHeaderView.addSubview(titleStackView)
         titleStackView.leadingAnchor.constraint(equalTo: tableHeaderView.leadingAnchor, constant: 16.0).isActive = true
@@ -68,12 +68,6 @@ class TrendsViewController: UIViewController, ChartViewDelegate {
         titleStackView.bottomAnchor.constraint(equalTo: tableHeaderView.bottomAnchor).isActive = true
         return tableHeaderView
     }()
-    
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let maxTitlePoint = tableView.convert(CGPoint(x: titleStackView.titleLabel.bounds.minX, y: titleStackView.titleLabel.bounds.maxY), from: titleStackView.titleLabel)
-        title = scrollView.contentOffset.y > maxTitlePoint.y ? "Trends" : nil
-    }
 }
 
 extension TrendsViewController:UITableViewDelegate, UITableViewDataSource{
@@ -123,6 +117,11 @@ extension TrendsViewController:UITableViewDelegate, UITableViewDataSource{
             tableView.restore()
         }
         return viewModel.data.count
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let maxTitlePoint = tableView.convert(CGPoint(x: titleStackView.titleLabel.bounds.minX, y: titleStackView.titleLabel.bounds.maxY), from: titleStackView.titleLabel)
+        title = scrollView.contentOffset.y > maxTitlePoint.y ? "Trends" : nil
     }
 }
 
