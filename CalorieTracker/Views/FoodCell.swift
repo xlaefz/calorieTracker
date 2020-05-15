@@ -12,7 +12,7 @@ class FoodCell: UITableViewCell {
     var foodImageView = UIImageView()
     var foodTitleLabel = UILabel()
     var calorieLabel = UILabel()
-    var link:AddFoodTodayViewController?
+    var link:AddFoodDelegate?
     let cardView = UIView()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -43,7 +43,7 @@ class FoodCell: UITableViewCell {
     }
         
     @objc private func handleMarkAsFavorite(){
-        link?.someMethodIWantToCall(cell: self)
+        link?.addFood(cell: self)
     }
     
     func addLink(_ _link: AddFoodTodayViewController){

@@ -164,7 +164,6 @@ class MyFoodViewController: UIViewController {
         page.foodNameTextField.text = food.name
         page.caloriesTextField.text = String(food.calories)
         page.selectedImage.image = UIImage(data: food.image!)
-        
     }
     
     @objc func fabTapped(_ button: UIButton) {

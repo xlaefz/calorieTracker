@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol AddFoodDelegate {
+    func addFood(cell: UITableViewCell)
+}
+
 class AddFoodTodayViewController: UIViewController {
     let tableView = UITableView()
     var viewModel:TodayViewModel?
@@ -30,20 +34,6 @@ class AddFoodTodayViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         viewModel?.foodsToAdd.removeAll()
-    }
-    
-    // TODO: SHOULD USE DELEGATION
-    func someMethodIWantToCall(cell: UITableViewCell){
-        guard  let indexPathClickedOn = tableView.indexPath(for: cell) else { return }
-        guard let food = viewModel?.foods[indexPathClickedOn.row] else { return }
-        let hasFavorited = viewModel?.foodsToAdd.contains(food) ?? false
-        if hasFavorited{
-            viewModel?.remove(food: food)
-        }
-        else{
-            viewModel?.addFood(food: food)
-        }
-        tableView.reloadRows(at: [indexPathClickedOn], with: .automatic)
     }
 }
 
@@ -84,4 +74,20 @@ extension AddFoodTodayViewController:UITableViewDataSource{
 }
 
 extension AddFoodTodayViewController:UITableViewDelegate{
+}
+
+extension AddFoodTodayViewController:AddFoodDelegate{
+    
+     func addFood(cell: UITableViewCell){
+           guard  let indexPathClickedOn = tableView.indexPath(for: cell) else { return }
+           guard let food = viewModel?.foods[indexPathClickedOn.row] else { return }
+           let hasFavorited = viewModel?.foodsToAdd.contains(food) ?? false
+           if hasFavorited{
+               viewModel?.remove(food: food)
+           }
+           else{
+               viewModel?.addFood(food: food)
+           }
+           tableView.reloadRows(at: [indexPathClickedOn], with: .automatic)
+       }
 }
