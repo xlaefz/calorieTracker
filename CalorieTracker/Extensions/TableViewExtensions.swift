@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import NVActivityIndicatorView
+
 
 extension UITableView {
     func setEmptyView(title: String) {
@@ -27,6 +29,22 @@ extension UITableView {
         titleLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
         titleLabel.text = title
         // The only tricky part is here:
+        self.backgroundView = emptyView
+        self.separatorStyle = .none
+    }
+    
+    func setLoadingView(){
+        let emptyView = UIView(frame: CGRect(x: self.center.x, y: self.center.y, width: self.bounds.size.width, height: self.bounds.size.height))
+        let frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        let indicatorType = NVActivityIndicatorType.ballRotate
+        let activityIndicatorView = NVActivityIndicatorView(frame: frame,
+                                               type: indicatorType)
+        emptyView.addSubview(activityIndicatorView)
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicatorView.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor).isActive = true
+        activityIndicatorView.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
+        
+        activityIndicatorView.startAnimating()
         self.backgroundView = emptyView
         self.separatorStyle = .none
     }

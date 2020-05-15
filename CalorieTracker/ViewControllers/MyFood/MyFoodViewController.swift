@@ -8,14 +8,13 @@
 
 import UIKit
 import BLTNBoard
-import NVActivityIndicatorView
 
 class MyFoodViewController: UIViewController {
     let cellId = "FoodCell"
     var viewModel = MyFoodViewModel()
     let tableView = UITableView()
     var page = TextFieldBulletinPage(title: "New Food")
-    
+    var isLoading = true
     
     lazy var bulletinManager: BLTNItemManager = {
         let rootItem: BLTNItem = page // ... create your item here
@@ -28,11 +27,11 @@ class MyFoodViewController: UIViewController {
         setupView()
         tableView.allowsSelectionDuringEditing = true
         viewModel.fetchData { [weak self] in
+            self?.isLoading = false
             self?.tableView.reloadData()
         }
-        let activityIndicatorView = NVActivityIndicatorView(frame: frame,
-                                               type: indicatorType)
-        self.view.addSubview(activityIndicatorView)
+        
+        
     }
     
     func configureTableView(){
@@ -56,7 +55,6 @@ class MyFoodViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        self.tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -178,8 +176,8 @@ class MyFoodViewController: UIViewController {
             guard let _food = self.page.foodNameTextField.text, let _calories = self.page.caloriesTextField.text, !(self.page.foodNameTextField.text?.isEmpty ?? false), !(self.page.caloriesTextField.text?.isEmpty ?? false), let _image = self.page.pickedImage else { return }
             guard let data = _image.pngData() else { return }
             self.viewModel.addFood(name: _food, calories: Int(_calories) ?? 0, data: data, completion:{ [weak self ] in
-                    self?.bulletinManager.dismissBulletin()
-                    self?.tableView.reloadData()
+                self?.bulletinManager.dismissBulletin()
+                self?.tableView.reloadData()
                 }
             )
             
@@ -223,7 +221,9 @@ class MyFoodViewController: UIViewController {
 
 extension MyFoodViewController:UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if viewModel.foods.count == 0 {
+        if viewModel.foods.count == 0  && isLoading{
+            tableView.setLoadingView()
+        }else if viewModel.foods.count == 0  && !isLoading{
             tableView.setEmptyView(title: "Add some foods to \nstart tracking!", message: "")
         }
         else {

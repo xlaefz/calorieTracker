@@ -13,6 +13,7 @@ class AddFoodTodayViewController: UIViewController {
     var viewModel:TodayViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.tintColor = UIColor.white
         configureTableView()
     }
     

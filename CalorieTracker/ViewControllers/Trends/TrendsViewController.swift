@@ -14,17 +14,23 @@ class TrendsViewController: UIViewController, ChartViewDelegate {
     @IBOutlet weak var tableView: UITableView!
     let viewModel = TrendsViewModel()
     let cellId = "charts"
+    var isLoading = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ChartTableViewCell.self, forCellReuseIdentifier: cellId)
         self.tableView.backgroundColor = .systemGray5
+        tableView.separatorColor = .clear
+        tableView.tableHeaderView = tableHeaderView
+        tableView.tableFooterView = UIView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.fetchData { [weak self] in
+            self?.isLoading = false
             self?.tableView.reloadData()
         }
     }
@@ -32,6 +38,30 @@ class TrendsViewController: UIViewController, ChartViewDelegate {
     override var preferredStatusBarStyle: UIStatusBarStyle
     {
         return .lightContent
+    }
+    
+    lazy var titleStackView: TitleStackView = {
+        let titleStackView = TitleStackView(frame: CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: 44.0)))
+        titleStackView.titleLabel.text = "Trends"
+        titleStackView.translatesAutoresizingMaskIntoConstraints = false
+        titleStackView.button.isHidden = true
+        return titleStackView
+    }()
+    
+    lazy var tableHeaderView: UIView = {
+        let tableHeaderView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: 44.0)))
+        tableHeaderView.addSubview(titleStackView)
+        titleStackView.leadingAnchor.constraint(equalTo: tableHeaderView.leadingAnchor, constant: 16.0).isActive = true
+        titleStackView.topAnchor.constraint(equalTo: tableHeaderView.topAnchor).isActive = true
+        titleStackView.trailingAnchor.constraint(equalTo: tableHeaderView.trailingAnchor, constant: -16.0).isActive = true
+        titleStackView.bottomAnchor.constraint(equalTo: tableHeaderView.bottomAnchor).isActive = true
+        return tableHeaderView
+    }()
+    
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let maxTitlePoint = tableView.convert(CGPoint(x: titleStackView.titleLabel.bounds.minX, y: titleStackView.titleLabel.bounds.maxY), from: titleStackView.titleLabel)
+        title = scrollView.contentOffset.y > maxTitlePoint.y ? "Trends" : nil
     }
 }
 
@@ -45,7 +75,7 @@ extension TrendsViewController:UITableViewDelegate, UITableViewDataSource{
             view.backgroundColor = .systemGray5
             let label = UILabel(frame: CGRect(x: 15, y: 15, width: 400, height: 30))
             label.textColor = UIColor.black
-            label.font = UIFont(name: "HelveticaNeue-Bold", size: 35)
+            label.font = UIFont(name: "HelveticaNeue-Bold", size: 23)
             label.textAlignment = .left
             label.text = viewModel.getSectionTitle(forSection: section)
             view.addSubview(label)
@@ -69,7 +99,16 @@ extension TrendsViewController:UITableViewDelegate, UITableViewDataSource{
         return  400
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        if isLoading{
+                          tableView.setLoadingView()
+              }
+        else if viewModel.foodsEatenAllTime.count == 0  && viewModel.foodsEatenPast7Days.count == 0 && !isLoading{
+            tableView.setEmptyView(title: "Add some foods to \nstart tracking!", message: "")
+        }
+        else {
+            tableView.restore()
+        }
+        return viewModel.data.count
     }
     
     

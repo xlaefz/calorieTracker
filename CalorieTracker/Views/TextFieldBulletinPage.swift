@@ -40,11 +40,8 @@ class TextFieldBulletinPage: FeedbackPageBLTNItem {
         
         let groupStack = makeHorizontalGroupStack()
         photosButton = interfaceBuilder.makeActionButton(title: "Camera")
-        photosButton.button.backgroundColor = .yellow
         photosButton.button.addTarget(self, action: #selector(useCamera), for: .touchUpInside)
-        
         cameraButton = interfaceBuilder.makeActionButton(title: "Photos")
-        cameraButton.button.backgroundColor = .yellow
         cameraButton.button.addTarget(self, action: #selector(usePhotoPicker), for: .touchUpInside)
         selectedImage = UIImageView(frame: CGRect(x: 100, y: 150, width: 75, height: 75)); // set as you want
         selectedImage.layer.cornerRadius = 8
@@ -153,4 +150,3 @@ extension TextFieldBulletinPage:UIImagePickerControllerDelegate, UINavigationCon
         
     }
 }
-

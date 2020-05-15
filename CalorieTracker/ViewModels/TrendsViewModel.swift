@@ -13,10 +13,11 @@ class TrendsViewModel{
     var foodsEatenPast7Days = [Food]()
     var foodsEatenAllTime = [Food]()
     let todaysDate = Date()
-    
+    var data = [[ChartPoint]]()
     func fetchData(completion:@escaping ()->()){
         DispatchQueue.background(background: { [weak self] in
             guard let self = self else { return }
+            self.data = [[ChartPoint]]()
             let fetchRequest:NSFetchRequest<Food> = Food.fetchRequest()
             var calendar = Calendar.current
             calendar.timeZone = NSTimeZone.local
@@ -30,7 +31,9 @@ class TrendsViewModel{
             do{
                 let foods = try PersistenceService.context.fetch(fetchRequest)
                 self.foodsEatenPast7Days = foods
-            } catch{
+                if !foods.isEmpty{
+                    self.data.append(self.getProcessedData(foods))
+                }            } catch{
             }
             
             let foodsFetchRequest:NSFetchRequest<Food> = Food.fetchRequest()
@@ -41,10 +44,18 @@ class TrendsViewModel{
                 self.foodsEatenAllTime = foods.sorted(by: { (fooda, foodb) -> Bool in
                     return fooda.lastEaten?.compare(foodb.lastEaten ?? Date()) == .orderedDescending
                 })
+                if !foods.isEmpty{
+                    self.data.append(self.getProcessedData(foods))
+                }
             } catch{
             }},completion:{
                 completion()
         })
+        
+    }
+    
+    func getProcessedData(_ foods:[Food])->[ChartPoint]{
+        return processData(foodsEatenPast7Days)
     }
     
     func getProcessedData(forSection index:Int)->[ChartPoint]{

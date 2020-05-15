@@ -41,7 +41,7 @@ class TodayViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var viewModel = TodayViewModel()
-    
+    var isLoading = true
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -51,8 +51,7 @@ class TodayViewController: UIViewController {
         tableView.tableHeaderView?.backgroundColor = UIColor.backgroundColor
         self.navigationController?.navigationBar.backgroundColor = UIColor.backgroundColor
         navigationController?.navigationBar.barTintColor = UIColor.backgroundColor
-        
-        self.navigationController?.navigationBar.layoutIfNeeded()
+        self.navigationController?.navigationBar.isTranslucent = false
         tableView.separatorColor = .clear
         tableView.register(TodaySummaryCell.self, forCellReuseIdentifier: "SummaryCell")
         tableView.register(FoodCell.self, forCellReuseIdentifier: "FoodCell")
@@ -68,6 +67,7 @@ class TodayViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         viewModel.fetchData { [weak self] in
+            self?.isLoading = false
             self?.tableView.reloadData()
         }
     }
@@ -125,7 +125,9 @@ extension TodayViewController:UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if viewModel.foodsEatenToday.count == 0 {
+        if viewModel.foods.count == 0  && isLoading{
+            tableView.setLoadingView()
+        }else if viewModel.foods.count == 0  && !isLoading{
             tableView.setEmptyView(title: "Add what you've\neaten today")
         }
         else {
@@ -150,7 +152,8 @@ extension TodayViewController:UITableViewDataSource{
             let calories = viewModel.todayCalories()
             cell.backgroundColor = UIColor.backgroundColor
             cell.caloriesToday = calories
-            cell.percentageLabel.text = "   \(calories)"
+            cell.percentageLabel.text = "\(calories)"
+            cell.isLoading = isLoading
             cell.animate()
             return cell
         }
@@ -163,6 +166,7 @@ extension TodayViewController:UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0{
             return self.view.frame.size.height * 0.4

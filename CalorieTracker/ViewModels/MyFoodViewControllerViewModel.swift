@@ -62,15 +62,14 @@ class MyFoodViewModel{
     }
     
     func remove(index:Int){
-        DispatchQueue.background(background: { [weak self] in
-            guard let self = self else { return }
-            let context = PersistenceService.context
+
+        let context = PersistenceService.context
             context.delete((self.foods[index]) as NSManagedObject)
             self.foods.remove(at: index)
             do{
                 try context.save()}
             catch{
                 
-            }})
+            }
     }
 }

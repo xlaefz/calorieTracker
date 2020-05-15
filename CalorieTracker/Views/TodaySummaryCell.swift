@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class TodaySummaryCell: UITableViewCell {
     var caloriesToday:Int?
     let shapeLayer = CAShapeLayer()
     var pulsatingLayer:CAShapeLayer!
+    var isLoading:Bool!
     var percentageLabel:UILabel = {
         let label = UILabel()
         label.text = "100%"
@@ -70,27 +72,41 @@ class TodaySummaryCell: UITableViewCell {
             
             layer.addSublayer(trackLayer)
             self.layer.addSublayer(shapeLayer)
-            percentageLabel.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-            percentageLabel.center = contentView.center
-            detailLabel.frame = CGRect(x: 0, y: 50, width: 300, height: 100)
-            detailLabel.center = CGPoint(x: 187.5+120, y: contentView.center.y+35)
-            //            detailLabel.center = contentView.center
-            addSubview(percentageLabel)
-            addSubview(detailLabel)
-            
-            percentageLabel.translatesAutoresizingMaskIntoConstraints = false
-            percentageLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant:  -20).isActive = true
-            percentageLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0).isActive = true
-            percentageLabel.heightAnchor.constraint(equalToConstant: 100).isActive = true
-            percentageLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
+            if isLoading {
+                let frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+                let indicatorType = NVActivityIndicatorType.ballRotate
+                let activityIndicatorView = NVActivityIndicatorView(frame: frame,
+                                                       type: indicatorType)
+//                emptyView.addSubview(activityIndicatorView)
+//                activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+//                activityIndicatorView.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor).isActive = true
+//                activityIndicatorView.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
+                activityIndicatorView.center = contentView.center
+                addSubview(activityIndicatorView)
 
-            detailLabel.translatesAutoresizingMaskIntoConstraints = false
-            detailLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0).isActive = true// (detailLabel.text?.width(withConstrainedHeight: 100, font: .systemFont(ofSize: 15)) ?? 0)/2 ?? 0).isActive = true
-           detailLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 30).isActive = true
+                activityIndicatorView.startAnimating()
+            }
+            else{
+                percentageLabel.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+                percentageLabel.center = contentView.center
+                detailLabel.frame = CGRect(x: 0, y: 50, width: 300, height: 100)
+                 detailLabel.center = CGPoint(x: 187.5+120, y: contentView.center.y+35)
+                 //            detailLabel.center = contentView.center
+                 addSubview(percentageLabel)
+                 addSubview(detailLabel)
+                 
+                 percentageLabel.translatesAutoresizingMaskIntoConstraints = false
+                 percentageLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+                 percentageLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0).isActive = true
+                 percentageLabel.heightAnchor.constraint(equalToConstant: 100).isActive = true
+                 percentageLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
 
-            detailLabel.heightAnchor.constraint(equalToConstant: 100).isActive = true
-            detailLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
-            
+                 detailLabel.translatesAutoresizingMaskIntoConstraints = false
+                 detailLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0).isActive = true
+                detailLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 30).isActive = true
+                 detailLabel.heightAnchor.constraint(equalToConstant: 100).isActive = true
+                 detailLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
+            }
         }
     }
     
